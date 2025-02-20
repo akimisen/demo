@@ -150,6 +150,23 @@
             "sharedComponentDoc": "共享组件",
             "utilsDoc": "工具文档",
             "changeLog": "更新日志"
+        },
+        "writing": {
+            "writing": "写作助手",
+            "outline": "大纲",
+            "outlineCharacters": "人物",
+            "outlineLocations": "地点",
+            "outlinePlots": "情节",
+            "outlineBoard": "故事板",
+            "outlineTimeline": "时间线",
+            "outlineTable": "表格视图",
+            "outlineList": "列表视图",
+            "content": "码字",
+            "contentEditor": "编辑器",
+            "contentAI": "AI扩写",
+            "inspiration": "灵感",
+            "inspirationChat": "对话Deepseek",
+            "inspirationImage": "设定图"
         }
     }
 }
