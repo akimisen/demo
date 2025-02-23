@@ -42,7 +42,11 @@ const VerticalMenuContent = (props: VerticalMenuContentProps) => {
 
     const { t } = useTranslation(!translationSetup)
 
-    const [defaulExpandKey, setDefaulExpandKey] = useState<string[]>([])
+    const [defaulExpandKey, setDefaulExpandKey] = useState<string[]>([
+        'writing.outline',
+        'writing.content',
+        'writing.inspiration'
+    ]);
 
     const { activedRoute } = useMenuActive(navigationTree, routeKey)
 
