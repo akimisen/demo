@@ -7,8 +7,8 @@ const writingDashboardData = {
         toBeDecided: 15
     },
     radarData: {
-        categories: ['情节构思', '人物塑造', '文字功底', '世界观构建', '节奏把控'],
-        series: [85, 70, 90, 80, 75]
+        categories: ['情节', '人物', '文笔', '设定', '爽感', '速度'],
+        series: [85, 70, 49, 75, 99, 85]
     },
     schedules: [
         {

@@ -68,21 +68,21 @@ const WritingStats = ({ data }: WritingStatsProps) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 rounded-2xl mt-4">
                 <StatisticCard
-                    title="今日码字"
+                    title="字数"
                     className="bg-sky-100 dark:bg-opacity-75"
                     value={data.todayWordCount}
                     unit="字"
                     icon={<TbPencil />}
                 />
                 <StatisticCard
-                    title="码字速度"
+                    title="速度"
                     className="bg-emerald-100 dark:bg-opacity-75"
                     value={data.writingSpeed}
                     unit="字/小时"
                     icon={<TbRocket />}
                 />
                 <StatisticCard
-                    title="待定指标"
+                    title="待定"
                     className="bg-purple-100 dark:bg-opacity-75"
                     value={data.toBeDecided}
                     icon={<TbBrain />}

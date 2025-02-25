@@ -65,7 +65,7 @@ const WritingCalendar = ({ schedules = [] }: WritingCalendarProps) => {
                     <button onClick={() => setSelectedDate(dayjs(selectedDate).subtract(1, 'month').toDate())}>
                         &lt;
                     </button>
-                    <span>{currentMonth.format('MMM YYYY')}</span>
+                    <span>{currentMonth.format('YYYY年 M月')}</span>
                     <button onClick={() => setSelectedDate(dayjs(selectedDate).add(1, 'month').toDate())}>
                         &gt;
                     </button>
@@ -89,7 +89,7 @@ const WritingCalendar = ({ schedules = [] }: WritingCalendarProps) => {
 
         return (
             <div className="mt-6">
-                <h5 className="mb-4">今日安排</h5>
+                <h5 className="mb-4">今日计划</h5>
                 <div className="space-y-4">
                     {schedules.map(schedule => (
                         <div 
