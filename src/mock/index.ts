@@ -14,5 +14,5 @@ import './fakeApi/aiFakeApi'
 import './fakeApi/chatFakeApi'
 import './fakeApi/helpCenterFakeApi'
 import './fakeApi/dashboardFakeApi'
-
+import './fakeApi/writingFakeApi'
 mock.onAny().passThrough()

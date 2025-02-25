@@ -1,3 +1,3 @@
-import ProjectDashboard from './ProjectDashboard'
+import WritingDashboard from './WritingDashboard'
 
-export default ProjectDashboard
+export default WritingDashboard
