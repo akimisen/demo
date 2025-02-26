@@ -157,7 +157,7 @@ const RolesPermissionsUserTable = (props: RolesPermissionsUserTableProps) => {
                         <Dropdown
                             renderTitle={
                                 <div
-                                    className="inline-flex items-center gap-2 py-2 px-4 rounded-lg hover:bg-gray-100 hover:dark:bg-gray-700 cursor-pointer"
+                                    className="inline-flex items-center gap-2 py-2 px-4 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                                     role="button"
                                 >
                                     <span className="font-bold heading-text">

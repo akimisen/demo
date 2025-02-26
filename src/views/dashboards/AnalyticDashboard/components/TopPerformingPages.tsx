@@ -35,9 +35,9 @@ const TopPerformingPages = ({ data }: TopPerformingPagesProps) => {
                 <Table hoverable={false}>
                     <THead>
                         <Tr>
-                            <Th className="!px-0">Page url</Th>
-                            <Th className="!text-right max-w-[100px]">Views</Th>
-                            <Th className="!px-0 !text-right max-w-[100px]">
+                            <Th className="px-0!">Page url</Th>
+                            <Th className="text-right! max-w-[100px]">Views</Th>
+                            <Th className="px-0! text-right! max-w-[100px]">
                                 Unique visitors
                             </Th>
                         </Tr>
@@ -46,7 +46,7 @@ const TopPerformingPages = ({ data }: TopPerformingPagesProps) => {
                         {data.map((row) => {
                             return (
                                 <Tr key={row.pageUrl}>
-                                    <Td className="!px-0">
+                                    <Td className="px-0!">
                                         <div className="heading-text font-bold">
                                             {row.pageUrl}
                                         </div>
@@ -63,7 +63,7 @@ const TopPerformingPages = ({ data }: TopPerformingPagesProps) => {
                                             />
                                         </div>
                                     </Td>
-                                    <Td className="!px-0">
+                                    <Td className="px-0!">
                                         <div className="flex items-center justify-end gap-2">
                                             {/* <ApexChart 
                                                 options={{...apexSparklineChartDefaultOption, ...{colors: row.growth > 0 ? [COLORS[1]] : [COLORS[2]]}}} 

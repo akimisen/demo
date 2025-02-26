@@ -4,6 +4,7 @@ import classNames from '@/utils/classNames'
 import { Link } from 'react-router-dom'
 import { TbPencil, TbRocket, TbBrain } from 'react-icons/tb'
 import type { ReactNode } from 'react'
+import type { WritingStats } from '../types'
 
 type StatisticCardProps = {
     title: string
@@ -14,11 +15,7 @@ type StatisticCardProps = {
 }
 
 type WritingStatsProps = {
-    data: {
-        todayWordCount: number
-        writingSpeed: number
-        toBeDecided: number  // 待定的第三个指标
-    }
+    data: WritingStats
 }
 
 const StatisticCard = ({

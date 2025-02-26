@@ -42,7 +42,7 @@ const ChatCustomAction = ({ content }: ChatCustomActionProps) => {
     })
 
     const btnClass =
-        'p-2 rounded-full hover:bg-black  hover:bg-opacity-5 hover:text-gray-900 dark:hover:bg-black dark:hover:text-gray-100 dark:hover:bg-opacity-40 transition-colors duration-300 ease-in-out'
+        'p-2 rounded-full hover:bg-black/5 hover:text-gray-900 dark:hover:text-gray-100 dark:hover:bg-opacity/40 transition-colors duration-300 ease-in-out'
 
     useEffect(() => {
         if (copied && content) {

@@ -103,7 +103,7 @@ const GeneratorPrompt = () => {
                     </div>
                     <textarea
                         ref={promptRef}
-                        className="w-full resize-none mt-1 placeholder:text-gray-400 bg-transparent focus:outline-none heading-text"
+                        className="w-full resize-none mt-1 placeholder:text-gray-400 bg-transparent focus:outline-hidden heading-text"
                         placeholder="Decribe the image you want to generate"
                     />
                 </div>

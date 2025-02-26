@@ -102,7 +102,7 @@ const ChatList = () => {
                     {showSearchBar ? (
                         <input
                             ref={inputRef}
-                            className="flex-1 h-full placeholder:text-gray-400 placeholder:text-base placeholder:font-normal bg-transparent focus:outline-none heading-text font-bold"
+                            className="flex-1 h-full placeholder:text-gray-400 placeholder:text-base placeholder:font-normal bg-transparent focus:outline-hidden heading-text font-bold"
                             placeholder="Search chat"
                             onChange={handleInputChange}
                         />

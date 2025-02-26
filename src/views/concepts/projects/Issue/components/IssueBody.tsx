@@ -140,7 +140,7 @@ const IssueBody = () => {
         ],
         editorProps: {
             attributes: {
-                class: 'm-2 focus:outline-none',
+                class: 'm-2 focus:outline-hidden',
             },
         },
         content: issueData.description,
@@ -355,7 +355,7 @@ const IssueBody = () => {
                         role="button"
                         onClick={handleDescriptionClick}
                     >
-                        <div className="prose-p:text-sm prose-p:dark:text-gray-400">
+                        <div className="prose-p:text-sm dark:prose-p:text-gray-400">
                             {ReactHtmlParser(issueData.description || '')}
                         </div>
                     </div>

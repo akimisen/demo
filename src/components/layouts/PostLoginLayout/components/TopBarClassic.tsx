@@ -24,7 +24,7 @@ const TopBarClassic = ({ children }: CommonProps) => {
                 <div className="flex flex-col flex-auto min-h-screen min-w-0 relative w-full">
                     <Header
                         container
-                        className="shadow dark:shadow-2xl"
+                        className="shadow-sm dark:shadow-2xl"
                         headerStart={
                             <>
                                 {smaller.lg && <MobileNav />}

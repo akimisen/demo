@@ -66,8 +66,8 @@ const demoApi = [
         api: [
             {
                 propName: 'shape',
-                type: `<code>'rounded'</code> | <code>'square'</code> | <code>'circle'</code>`,
-                default: `<code>'rounded'</code>`,
+                type: `<code>'rounded-sm'</code> | <code>'square'</code> | <code>'circle'</code>`,
+                default: `<code>'rounded-sm'</code>`,
                 desc: 'Shape of Avatar',
             },
             {

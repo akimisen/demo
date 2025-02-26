@@ -115,7 +115,7 @@ const MenuLink = ({
                 <Avatar
                     className={classNames(
                         'bg-white dark:bg-transparent p-2 border-2 border-gray-200 dark:border-gray-600',
-                        active ? 'text-primary' : 'heading-text',
+                        active ? 'text-primary' : 'text-gray-900 dark:text-gray-100',
                     )}
                     size={40}
                     icon={icon}
@@ -361,7 +361,7 @@ const TabLayout = ({
                                                         'bg-white dark:bg-transparent p-2 border-2 border-gray-200 dark:border-gray-600',
                                                         nav.key === routeKey
                                                             ? 'text-primary'
-                                                            : 'heading-text',
+                                                            : 'text-gray-900 dark:text-gray-100',
                                                     )}
                                                     size={40}
                                                     icon={
@@ -458,7 +458,7 @@ const HorizontalMenuDropdownContent = (
 
     return (
         <div
-            className="rounded-2xl bg-white dark:bg-gray-900 ring-0 shadow-[0px_48px_64px_-16px_rgba(0,0,0,0.25)] border border-gray-100 dark:border-gray-800 focus:outline-none min-w-[180px]"
+            className="rounded-2xl bg-white dark:bg-gray-900 ring-0 shadow-[0px_48px_64px_-16px_rgba(0,0,0,0.25)] border border-gray-100 dark:border-gray-800 focus:outline-hidden min-w-[180px]"
             style={style}
         >
             {layoutMeta?.layout === 'default' && (

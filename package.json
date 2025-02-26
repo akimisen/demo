@@ -1,7 +1,7 @@
 {
   "name": "ecme",
   "private": true,
-  "version": "1.1.2",
+  "version": "1.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,8 +20,7 @@
     "@fullcalendar/interaction": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
-    "@headlessui/react": "^2.2.0",
-    "@hello-pangea/dnd": "^17.0.0",
+    "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^3.9.0",
     "@tanstack/match-sorter-utils": "^8.19.4",
     "@tanstack/react-table": "^8.20.5",
@@ -43,7 +42,6 @@
     "html-react-parser": "^5.2.1",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
-    "lucide-react": "^0.475.0",
     "marked": "^15.0.3",
     "react": "19.0.0",
     "react-apexcharts": "^1.7.0",
@@ -57,7 +55,7 @@
     "react-modal": "^3.16.3",
     "react-number-format": "^5.4.3",
     "react-router-dom": "^6.26.2",
-    "react-scroll": "^1.9.0",
+    "react-scroll": "^1.9.2",
     "react-select": "^5.9.0",
     "react-simple-maps": "4.0.0-beta.6",
     "react-syntax-highlighter": "^15.6.1",
@@ -73,6 +71,7 @@
     "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
+    "@tailwindcss/postcss": "^4.0.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/d3-fetch": "^3.0.7",
     "@types/d3-scale": "^4.0.8",
@@ -90,7 +89,6 @@
     "@typescript-eslint/eslint-plugin": "^8.5.0",
     "@typescript-eslint/parser": "^8.5.0",
     "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.20",
     "color": "^4.2.3",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
@@ -104,22 +102,14 @@
     "postcss": "^8.4.45",
     "postcss-nesting": "^13.0.0",
     "prettier": "^3.3.3",
-    "tailwindcss": "^3.4.10",
+    "tailwindcss": "^4.0.2",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2",
     "vite": "^6.0.5",
     "vite-plugin-dynamic-import": "^1.5.0"
   },
   "overrides": {
-    "@hello-pangea/dnd": {
-      "react": "19.0.0",
-      "react-dom": "19.0.0"
-    },
     "gantt-task-react": {
-      "react": "19.0.0",
-      "react-dom": "19.0.0"
-    },
-    "react-scroll": {
       "react": "19.0.0",
       "react-dom": "19.0.0"
     },

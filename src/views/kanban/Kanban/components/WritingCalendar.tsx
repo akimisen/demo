@@ -7,14 +7,7 @@ import {
     TbTarget, 
     TbCalendarTime 
 } from 'react-icons/tb'
-
-type WritingSchedule = {
-    id: string
-    title: string
-    type: 'writing' | 'planning' | 'review' | 'goal'
-    time?: string
-    description?: string
-}
+import type { WritingSchedule } from '../types'
 
 type WritingCalendarProps = {
     schedules?: WritingSchedule[]

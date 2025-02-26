@@ -1,3 +1,5 @@
-.toast {
-  @apply fixed z-40;
+@layer components {
+  .toast {
+    @apply fixed z-40;
+  }
 }

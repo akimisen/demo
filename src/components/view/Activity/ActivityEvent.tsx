@@ -132,7 +132,7 @@ const ActivityEvent = ({ data, compact }: ActivityEventProps) => {
                             {ticketStatus[data.status || 0].label}
                         </HighlightedText>
                     </span>
-                    <span className="ml-1 rtl:mr-1 md;ml-3 rtl:md:mr-3 font-semibold">
+                    <span className="ml-1 rtl:mr-1 md;ml-3 md:rtl:mr-3 font-semibold">
                         <UnixDateTime value={data.dateTime} />
                     </span>
                 </p>
@@ -160,7 +160,7 @@ const ActivityEvent = ({ data, compact }: ActivityEventProps) => {
                             <HighlightedText>{data.userName}</HighlightedText>
                             <span className="mx-1">comment on your</span>
                             <HighlightedText>Post</HighlightedText>
-                            <span className="ml-1 rtl:mr-1 md;ml-3 rtl:md:mr-3 font-semibold">
+                            <span className="ml-1 rtl:mr-1 md;ml-3 md:rtl:mr-3 font-semibold">
                                 <UnixDateTime value={data.dateTime} />
                             </span>
                         </p>
@@ -200,7 +200,7 @@ const ActivityEvent = ({ data, compact }: ActivityEventProps) => {
                                 mentioned you in a comment
                             </span>
                             <HighlightedText>Post</HighlightedText>
-                            <span className="ml-1 rtl:mr-1 md;ml-3 rtl:md:mr-3 font-semibold">
+                            <span className="ml-1 rtl:mr-1 md;ml-3 md:rtl:mr-3 font-semibold">
                                 <UnixDateTime value={data.dateTime} />
                             </span>
                         </p>
@@ -251,7 +251,7 @@ const ActivityEvent = ({ data, compact }: ActivityEventProps) => {
                             </Tag>
                         ))}
                     </span>
-                    <span className="ml-1 rtl:mr-1 md;ml-3 rtl:md:mr-3 font-semibold">
+                    <span className="ml-1 rtl:mr-1 md;ml-3 md:rtl:mr-3 font-semibold">
                         <UnixDateTime value={data.dateTime} />
                     </span>
                 </div>
@@ -293,7 +293,7 @@ const ActivityEvent = ({ data, compact }: ActivityEventProps) => {
                     ))}
                     <span className="mx-1">to ticket</span>
                     <HighlightedText>{data.ticket} </HighlightedText>
-                    <span className="ml-1 rtl:mr-1 md;ml-3 rtl:md:mr-3 font-semibold">
+                    <span className="ml-1 rtl:mr-1 md;ml-3 md:rtl:mr-3 font-semibold">
                         <UnixDateTime value={data.dateTime} />
                     </span>
                 </div>
@@ -321,7 +321,7 @@ const ActivityEvent = ({ data, compact }: ActivityEventProps) => {
                     <HighlightedText>{data.ticket}</HighlightedText>
                     <span className="mx-1">to</span>
                     <HighlightedText>{data.assignee} </HighlightedText>
-                    <span className="ml-1 rtl:mr-1 md;ml-3 rtl:md:mr-3 font-semibold">
+                    <span className="ml-1 rtl:mr-1 md;ml-3 md:rtl:mr-3 font-semibold">
                         <UnixDateTime value={data.dateTime} />
                     </span>
                 </div>
@@ -332,7 +332,7 @@ const ActivityEvent = ({ data, compact }: ActivityEventProps) => {
                     <HighlightedText>{data.userName} </HighlightedText>
                     <span className="mx-1">has created ticket</span>
                     <HighlightedText>{data.ticket}</HighlightedText>
-                    <span className="ml-1 rtl:mr-1 md;ml-3 rtl:md:mr-3 font-semibold">
+                    <span className="ml-1 rtl:mr-1 md;ml-3 md:rtl:mr-3 font-semibold">
                         <UnixDateTime value={data.dateTime} />
                     </span>
                 </div>

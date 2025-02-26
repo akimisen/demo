@@ -52,15 +52,15 @@ const TopChannel = ({ data }: TopChannelProps) => {
                 <Table className="mt-6" hoverable={false}>
                     <THead>
                         <Tr>
-                            <Th className="!px-0">Channel</Th>
+                            <Th className="px-0!">Channel</Th>
                             <Th>Percentage</Th>
-                            <Th className="!px-0">Total</Th>
+                            <Th className="px-0!">Total</Th>
                         </Tr>
                     </THead>
                     <TBody>
                         {data.channels.map((channel) => (
                             <Tr key={channel.id}>
-                                <Td className="!px-0">
+                                <Td className="px-0!">
                                     <div className="flex items-center gap-2">
                                         <Avatar
                                             size={28}
@@ -73,7 +73,7 @@ const TopChannel = ({ data }: TopChannelProps) => {
                                     </div>
                                 </Td>
                                 <Td>{channel.percentage}%</Td>
-                                <Td className="!px-0">
+                                <Td className="px-0!">
                                     <NumericFormat
                                         displayType="text"
                                         value={channel.total}

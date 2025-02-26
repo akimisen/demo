@@ -101,7 +101,7 @@ const demoApi = [
                 desc: 'Replace default close',
             },
             {
-                propName: 'rounded',
+                propName: 'rounded-sm',
                 type: `<code>boolean</code>`,
                 default: `<code>true</code>`,
                 desc: 'Whether the Alert have round border radius',

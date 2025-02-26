@@ -125,10 +125,10 @@ const PaymentDialog = () => {
                                             return (
                                                 <div
                                                     className={classNames(
-                                                        'flex justify-between border rounded-xl border-gray-300 py-5 px-4 select-none ring-1 w-1/2',
+                                                        'flex justify-between border rounded-xl border-gray-300 dark:border-gray-600 py-5 px-4 select-none ring-1 w-1/2',
                                                         active
-                                                            ? 'ring-primary border-primary '
-                                                            : 'ring-transparent bg-gray-100',
+                                                            ? 'ring-primary border-primary'
+                                                            : 'ring-transparent bg-gray-100 dark:bg-gray-600',
                                                     )}
                                                     role="button"
                                                     onClick={onSegmentItemClick}
@@ -176,7 +176,7 @@ const PaymentDialog = () => {
                                 <div className="flex items-center gap-2 mt-2">
                                     <TbMail className="text-2xl" />
                                     <input
-                                        className="focus:outline-none heading-text flex-1"
+                                        className="focus:outline-hidden heading-text flex-1"
                                         placeholder="Enter email"
                                         type="email"
                                     />
@@ -191,17 +191,17 @@ const PaymentDialog = () => {
                                         <TbCreditCard className="text-2xl" />
                                     </div>
                                     <PatternFormat
-                                        className="focus:outline-none heading-text w-full"
+                                        className="focus:outline-hidden heading-text w-full"
                                         placeholder="Credit card number"
                                         format="#### #### #### ####"
                                     />
                                     <NumberFormatBase
-                                        className="focus:outline-none heading-text max-w-12 sm:max-w-28"
+                                        className="focus:outline-hidden heading-text max-w-12 sm:max-w-28"
                                         placeholder="MM/YY"
                                         format={cardExpiryFormat}
                                     />
                                     <PatternFormat
-                                        className="focus:outline-none heading-text max-w-12 sm:max-w-28"
+                                        className="focus:outline-hidden heading-text max-w-12 sm:max-w-28"
                                         placeholder="CVC"
                                         format="###"
                                     />

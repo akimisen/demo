@@ -126,7 +126,7 @@ const Filtering = () => {
         <>
             <DebouncedInput
                 value={globalFilter ?? ''}
-                className="p-2 font-lg shadow border border-block"
+                className="p-2 font-lg shadow-sm border border-block"
                 placeholder="Search all columns..."
                 onChange={(value) => setGlobalFilter(String(value))}
             />

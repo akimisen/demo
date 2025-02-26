@@ -103,7 +103,7 @@ const BillingHistory = ({ data = [], ...rest }: BillingHistoryProps) => {
     return (
         <div {...rest}>
             <Table>
-                <THead className="!bg-transparent">
+                <THead className="bg-transparent!">
                     {table.getHeaderGroups().map((headerGroup) => (
                         <Tr key={headerGroup.id}>
                             {headerGroup.headers.map((header) => {

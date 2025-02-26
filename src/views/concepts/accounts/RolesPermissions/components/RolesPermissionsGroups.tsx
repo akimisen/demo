@@ -36,7 +36,7 @@ const RolesPermissionsGroups = ({ roleList }: RolesPermissionsGroupsProps) => {
                                 <UsersAvatarGroup
                                     avatarProps={{
                                         className:
-                                            'cursor-pointer -mr-2 border-2 border-white dark:border-500',
+                                            'cursor-pointer -mr-2 border-2 border-white dark:border-gray-500',
                                         size: 28,
                                     }}
                                     avatarGroupProps={{ maxCount: 3 }}

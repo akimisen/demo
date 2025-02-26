@@ -60,7 +60,7 @@ const ChatHistoryItem = (props: ChatHistoryItemProps) => {
             </div>
             <div
                 className={classNames(
-                    'rounded-xl absolute bottom-0 top-0 to-transparent ltr:right-0 ltr:bg-gradient-to-l rtl:left-0 rtl:bg-gradient-to-r group-hover:from-gray-100 dark:group-hover:from-gray-700 w-8 from-0% group-hover:w-20 group-hover:from-60% flex items-center justify-end',
+                    'rounded-xl absolute bottom-0 top-0 to-transparent ltr:right-0 ltr:bg-linear-to-l rtl:left-0 rtl:bg-linear-to-r group-hover:from-gray-100 dark:group-hover:from-gray-700 w-8 from-0% group-hover:w-20 group-hover:from-60% flex items-center justify-end',
                     dropdownOpen &&
                         'from-gray-100 dark:from-gray-700 w-20 from-60%',
                 )}

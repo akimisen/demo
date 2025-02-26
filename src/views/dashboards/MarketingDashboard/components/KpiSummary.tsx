@@ -80,7 +80,7 @@ const KpiSummary = ({ data }: KpiSummaryProps) => {
                     growShrink={data.totalMarketingSpend.growShrink}
                     icon={<TbMoneybag />}
                     iconClass="bg-rose-200"
-                    className="border-b border-r-0 md:border-b-0 md:border-r border-gray-200 dark:border-gray-700"
+                    className="border-b border-r-0 md:border-b-0 md:ltr:border-r md:rtl:border-l border-gray-200 dark:border-gray-700"
                 />
                 <SummarySegment
                     title="ROI"
@@ -95,7 +95,7 @@ const KpiSummary = ({ data }: KpiSummaryProps) => {
                     growShrink={data.roi.growShrink}
                     icon={<TbReportMoney />}
                     iconClass="bg-sky-200"
-                    className="border-b md:border-b-0 xl:border-r border-gray-200 dark:border-gray-700"
+                    className="border-b md:border-b-0 xl:ltr:border-r xl:rtl:border-l border-gray-200 dark:border-gray-700"
                 />
                 <SummarySegment
                     title="Conversion rates"
@@ -110,7 +110,7 @@ const KpiSummary = ({ data }: KpiSummaryProps) => {
                     growShrink={data.conversionRates.growShrink}
                     icon={<TbRefreshAlert />}
                     iconClass="bg-emerald-200"
-                    className="border-b border-r-0 md:border-b-0 md:border-r border-gray-200 dark:border-gray-700"
+                    className="border-b border-r-0 md:border-b-0 md:ltr:border-r md:rtl:border-l border-gray-200 dark:border-gray-700"
                 />
                 <SummarySegment
                     title="Total leads"

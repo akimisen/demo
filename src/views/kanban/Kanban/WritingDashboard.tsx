@@ -1,41 +1,14 @@
 import Loading from '@/components/shared/Loading'
 import useSWR from 'swr'
 import { apiGetWritingDashboard } from '@/services/WritingService'
+import { WritingDashboardResponse } from './types'
 
 // 从components中导入这些组件
 import WritingStats from './components/WritingStats'
 import WritingCalendar from './components/WritingCalendar'
-import NovelsList from './components/NovelsList'
+// import NovelsList from './components/NovelsList'
+import NovelsBoard from './components/NovelsBoard'
 import WritingRadar from './components/WritingRadar'
-
-// 临时使用这个类型,后续可以根据实际需求修改
-type WritingDashboardResponse = {
-    stats: {
-        todayWordCount: number
-        writingSpeed: number
-        toBeDecided: number
-    }
-    radarData: {
-        categories: string[]
-        series: number[]
-    }
-    schedules: Array<{
-        id: string
-        title: string
-        type: 'writing' | 'planning' | 'review' | 'goal'
-        time?: string
-        description?: string
-    }>
-    novels: Array<{
-        id: string
-        title: string
-        wordCount: number
-        status: 'ongoing' | 'completed' | 'planned'
-        lastUpdated: string
-        progress: number
-        cover?: string
-    }>
-}
 
 const Kanban = () => {
     const { data, isLoading } = useSWR(
@@ -57,17 +30,17 @@ const Kanban = () => {
                             <WritingStats data={data.stats} />
                             <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="md:col-span-2">
-                                <NovelsList data={data.novels} />
+                                <NovelsBoard data={data.novels} />
                             </div>
                             <div className="md:col-span-1">
-                                <WritingCalendar schedules={data.schedules} />
+                                <WritingRadar 
+                                data={data.radarData}
+                            />
                             </div>
                         </div>
                         </div>
                         <div className="xl:col-span-1">
-                            <WritingRadar 
-                                data={data.radarData}
-                            />
+                            <WritingCalendar schedules={data.schedules} />  
                         </div>
                     </div>
                 </div>

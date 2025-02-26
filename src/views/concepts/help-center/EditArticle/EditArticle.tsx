@@ -23,7 +23,7 @@ const EditArticle = () => {
 
     return (
         <>
-            <div className="max-w-[1200px] mx-auto">
+            <div className="max-w-[1200px] mx-auto w-full">
                 {data && (
                     <div className="flex flex-col gap-2">
                         <EditArticleHeader {...data} />

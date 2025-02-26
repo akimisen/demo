@@ -1,11 +1,7 @@
 import Card from '@/components/ui/Card'
 import Chart from '@/components/shared/Chart'
 import { COLORS } from '@/constants/chart.constant'
-
-type WritingRadarData = {
-    categories: string[]
-    series: number[]
-}
+import type { WritingRadarData } from '../types'
 
 type WritingRadarProps = {
     data: WritingRadarData
@@ -14,8 +10,8 @@ type WritingRadarProps = {
 const WritingRadar = ({ data }: WritingRadarProps) => {
     return (
         <Card>
-            <div className="flex items-center justify-between">
-                <h4>能力面板</h4>
+            <div className="flex items-center justify-between mb-4 px-1">
+                <h4 className="m-0">能力面板</h4>
             </div>
             <div className="mt-6">
                 <Chart

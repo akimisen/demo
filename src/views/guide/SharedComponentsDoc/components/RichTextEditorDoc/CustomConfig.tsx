@@ -13,7 +13,7 @@ const CustomConfig = () => {
         extensions: [Paragraph, Text, Heading, Document],
         editorProps: {
             attributes: {
-                class: 'm-2 focus:outline-none',
+                class: 'm-2 focus:outline-hidden',
             },
         },
         content,

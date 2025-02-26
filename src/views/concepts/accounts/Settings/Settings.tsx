@@ -24,7 +24,7 @@ const Settings = () => {
                         <SettingsMenu />
                     </div>
                 )}
-                <div className="ltr:xl:pl-6 rtl:xl:pr-6 flex-1 py-2">
+                <div className="xl:ltr:pl-6 xl:rtl:pr-6 flex-1 py-2">
                     {smaller.lg && (
                         <div className="mb-6">
                             <SettingMobileMenu />

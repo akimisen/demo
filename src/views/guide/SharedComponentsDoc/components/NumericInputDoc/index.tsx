@@ -84,7 +84,7 @@ const demoApi = [
                 propName: 'allowLeadingZeros',
                 type: `<code>boolean</code>`,
                 default: `-`,
-                desc: 'This allows enabling or disabling leading zeros in the input field. By default, on blur of an input, leading zeros are removed. To allow leading 0s in the input field, set allowLeadingZeros to true. This does not, however, control trailing zeros',
+                desc: 'This allows enabling or disabling leading zeros in the input field. By default, on blur-sm of an input, leading zeros are removed. To allow leading 0s in the input field, set allowLeadingZeros to true. This does not, however, control trailing zeros',
             },
             {
                 propName: 'allowNegative',

@@ -18,7 +18,7 @@ const TaskListHeader = ({
     return (
         <div className="table">
             <div
-                className="table-row list-none bg-gray-100/50 bg:fill-gray-700/40"
+                className="table-row list-none bg:fill-gray-700/40"
                 style={{
                     height: headerHeight,
                 }}
@@ -41,7 +41,7 @@ const TaskListHeader = ({
             {extraHeaders.map((headers, index) => (
                 <div
                     key={`${headers}-${index}`}
-                    className="table-row list-none bg-gray-100/50 bg:fill-gray-700/40"
+                    className="table-row list-none bg:fill-gray-700/40"
                     style={{
                         height: headerHeight,
                     }}

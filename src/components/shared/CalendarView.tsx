@@ -88,10 +88,10 @@ const CalendarView = (props: CalendarViewProps) => {
                                     : '',
                                 isEnd &&
                                     !isStart &&
-                                    '!rounded-tl-none !rounded-bl-none !rtl:rounded-tr-none !rtl:rounded-br-none',
+                                    'rounded-tl-none! rounded-bl-none! !rtl:rounded-tr-none !rtl:rounded-br-none',
                                 !isEnd &&
                                     isStart &&
-                                    '!rounded-tr-none !rounded-br-none !rtl:rounded-tl-none !rtl:rounded-bl-none',
+                                    'rounded-tr-none! rounded-br-none! !rtl:rounded-tl-none !rtl:rounded-bl-none',
                             )}
                         >
                             {!(isEnd && !isStart) && (

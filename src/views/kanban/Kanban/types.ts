@@ -59,3 +59,46 @@ export type GetProjectDashboardResponse = {
     schedule: ExtendedTask[]
     recentActivity: Activities
 }
+
+// Writing 相关的新类型
+export type Novel = {
+    id: string
+    title: string
+    wordCount: number
+    latestChapter: string
+    status: 'ongoing' | 'completed' | 'planned'
+    lastUpdated: string
+    progress: number
+    cover?: string
+    genre?: string
+    summary?: string
+    protagonist?: string
+    setting?: string
+    targetAudience?: string
+}
+
+export type WritingSchedule = {
+    id: string
+    title: string
+    type: 'writing' | 'planning' | 'review' | 'goal'
+    time?: string
+    description?: string
+}
+
+export type WritingStats = {
+    todayWordCount: number
+    writingSpeed: number
+    toBeDecided: number
+}
+
+export type WritingRadarData = {
+    categories: string[]
+    series: number[]
+}
+
+export type WritingDashboardResponse = {
+    stats: WritingStats
+    radarData: WritingRadarData
+    schedules: WritingSchedule[]
+    novels: Novel[]
+}

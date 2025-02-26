@@ -69,7 +69,7 @@ const StepItem = (props: StepItemProps) => {
 
     const stepConnectClass = classNames(
         'step-connect',
-        title ? 'ml-2.5 rtl:mr-2.5' : '',
+        title ? 'step-title' : '',
         vertical ? 'step-connect-vertical' : '',
         status === COMPLETE ? `bg-primary` : `inactive`,
     )

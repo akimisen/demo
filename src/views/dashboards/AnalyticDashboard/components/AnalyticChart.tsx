@@ -36,21 +36,21 @@ const WebAnalytic = ({ data }: WebAnalyticProps) => {
                 <div className="inline-flex items-center gap-6">
                     <div className="flex items-center gap-1.5">
                         <div
-                            className="h-3.5 w-3.5 rounded"
+                            className="h-3.5 w-3.5 rounded-sm"
                             style={{ backgroundColor: COLORS[0] }}
                         />
                         <div>Natural</div>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <div
-                            className="h-3.5 w-3.5 rounded"
+                            className="h-3.5 w-3.5 rounded-sm"
                             style={{ backgroundColor: COLORS[7] }}
                         />
                         <div>Referral</div>
                     </div>
                     <div className="flex items-center gap-1.5">
                         <div
-                            className="h-3.5 w-3.5 rounded"
+                            className="h-3.5 w-3.5 rounded-sm"
                             style={{ backgroundColor: COLORS[8] }}
                         />
                         <div>Direct</div>

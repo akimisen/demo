@@ -296,7 +296,7 @@ const demoApi = [
                 propName: 'onBlur',
                 type: `<code>function(event: Event)</code> `,
                 default: `-`,
-                desc: 'Callback when DatePicker Input blur',
+                desc: 'Callback when DatePicker Input blur-sm',
             },
             {
                 propName: 'onChange',
@@ -798,7 +798,7 @@ const demoApi = [
                 propName: 'onBlur',
                 type: `<code>function(event: Event)</code> `,
                 default: `-`,
-                desc: 'Callback when DateTimepicker Input blur',
+                desc: 'Callback when DateTimepicker Input blur-sm',
             },
             {
                 propName: 'onChange',

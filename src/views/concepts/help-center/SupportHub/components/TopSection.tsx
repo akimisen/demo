@@ -22,7 +22,7 @@ const TopSection = () => {
     }
 
     return (
-        <section className="flex flex-col justify-center h-[300px] bg-gradient-to-tr from-cyan-100 via-violet-100 to-fuchsia-100 dark:from-cyan-500 dark:via-violet-500 dark:to-fuchsia-500">
+        <section className="flex flex-col justify-center h-[300px] bg-linear-to-tr from-cyan-100 via-violet-100 to-fuchsia-100 dark:from-cyan-500 dark:via-violet-500 dark:to-fuchsia-500">
             <Container className="flex flex-col items-center px-4">
                 <div className="mb-6 flex flex-col items-center">
                     <h2 className="mb-4 text-center">
@@ -37,7 +37,7 @@ const TopSection = () => {
                     <div className="flex items-center gap-2 w-full h-[56px]">
                         <input
                             ref={inputRef}
-                            className="flex-1 h-full placeholder:text-gray-400 placeholder:font-semibold font-semibold bg-transparent focus:outline-none heading-text"
+                            className="flex-1 h-full placeholder:text-gray-400 placeholder:font-semibold font-semibold bg-transparent focus:outline-hidden heading-text"
                             placeholder="Type to search an article"
                             onKeyDown={(event) => {
                                 if (event.key === 'Enter') {

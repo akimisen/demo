@@ -27,7 +27,7 @@ const Controlled = () => {
                 <Steps.Item title="In Review" />
                 <Steps.Item title="Approved" />
             </Steps>
-            <div className="mt-6 h-40 bg-gray-50 dark:bg-gray-700 rounded flex items-center justify-center">
+            <div className="mt-6 h-40 bg-gray-50 dark:bg-gray-700 rounded-sm flex items-center justify-center">
                 <h6>Step {`${step + 1}`} content</h6>
             </div>
             <div className="mt-4 text-right">

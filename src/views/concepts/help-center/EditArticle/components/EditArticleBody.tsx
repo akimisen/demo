@@ -29,7 +29,7 @@ const EditArticleBody = ({ content }: EditArticleBodyProps) => {
         ],
         editorProps: {
             attributes: {
-                class: 'm-2 focus:outline-none',
+                class: 'm-2 focus:outline-hidden',
             },
         },
         content,

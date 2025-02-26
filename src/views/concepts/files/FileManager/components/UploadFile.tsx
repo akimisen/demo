@@ -40,7 +40,7 @@ const UploadFile = () => {
                 <h4>Upload Files</h4>
                 <Upload
                     draggable
-                    className="mt-6 bg-gray-100"
+                    className="mt-6 bg-gray-100 dark:bg-transparent"
                     onChange={setUploadedFiles}
                     onFileRemove={setUploadedFiles}
                 >

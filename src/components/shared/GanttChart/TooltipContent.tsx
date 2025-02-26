@@ -23,7 +23,7 @@ const TooltipContent = (props: TooltipContentProps) => {
     const { task } = props
 
     return (
-        <div className="p-3 rounded-lg shadow bg-gray-800 dark:bg-black  flex justify-between items-center min-w-[200px] z-10">
+        <div className="p-3 rounded-lg shadow-sm bg-gray-800 dark:bg-black  flex justify-between items-center min-w-[200px] z-10">
             <div className="flex flex-col w-full">
                 <div className="text-white font-bold mb-1">{task.name}</div>
                 <div className="flex items-center gap-1 text-gray-300">

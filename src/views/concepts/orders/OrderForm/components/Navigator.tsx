@@ -49,7 +49,7 @@ const Navigator = () => {
                     <span className="flex items-center gap-2">
                         <Avatar
                             icon={nav.icon}
-                            className="bg-gray-100 dark:bg-gray-700 group-hover:bg-white group-[.active]:bg-white dark:group-hover:bg-gray-800 dark:group-[.active]:bg-gray-800 heading-text "
+                            className="bg-gray-100 dark:bg-gray-700 group-hover:bg-white group-[.active]:bg-white dark:group-hover:bg-gray-800 dark:group-[.active]:bg-gray-800 text-gray-900 dark:text-gray-100"
                         />
                         <span className="flex flex-col flex-1">
                             <span className="heading-text font-bold">

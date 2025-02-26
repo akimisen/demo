@@ -47,7 +47,7 @@ const EditArticleHeader = (props: EditArticleHeaderProps) => {
     return (
         <div>
             <input
-                className="ring-0 outline-none block w-full p-2 bg-transparent heading-text h3"
+                className="ring-0 outline-hidden block w-full p-2 bg-transparent heading-text h3"
                 placeholder="Untitle article"
                 value={articleTitle}
                 onChange={(e) => setArticleTitle(e.target.value)}
@@ -73,7 +73,7 @@ const EditArticleHeader = (props: EditArticleHeaderProps) => {
                         ))}
                         <input
                             ref={inputRef}
-                            className="ring-0 outline-none block py-2 bg-transparent heading-text text-sm"
+                            className="ring-0 outline-hidden block py-2 bg-transparent heading-text text-sm"
                             type="text"
                             onKeyDown={(event) => {
                                 if (event.key === 'Enter') {

@@ -65,7 +65,7 @@ const IssueFooter = () => {
                                                     src={comment.src}
                                                 />
                                             </div>
-                                            <div className="ml-2 rtl:mr-2 p-3 rounded w-100">
+                                            <div className="ml-2 rtl:mr-2 p-3 rounded-sm flex-1">
                                                 <div className="flex items-center mb-2">
                                                     <span className="font-semibold text-gray-900 dark:text-gray-100">
                                                         {comment.name}

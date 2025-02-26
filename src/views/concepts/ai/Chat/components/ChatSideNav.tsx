@@ -40,7 +40,7 @@ const ChatSideNav = ({ className, bodyClass, onClick }: ChatSideNavProps) => {
                     <div className="flex items-center gap-2 px-5 w-full h-[60px]">
                         <TbSearch className="text-xl" />
                         <input
-                            className="flex-1 h-full placeholder:text-gray-400 placeholder:text-base bg-transparent focus:outline-none heading-text"
+                            className="flex-1 h-full placeholder:text-gray-400 placeholder:text-base bg-transparent focus:outline-hidden heading-text"
                             placeholder="Search chat"
                             onChange={handleInputChange}
                         />

@@ -54,7 +54,7 @@ const LogAction = ({
                 placement="bottom-end"
                 renderTitle={
                     <button
-                        className="close-button !p-2.5 button-press-feedback"
+                        className="close-button p-2.5! button-press-feedback"
                         type="button"
                     >
                         <TbFilter />

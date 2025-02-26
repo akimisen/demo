@@ -42,7 +42,7 @@ const demos = [
         mdName: 'BorderLess',
         mdPath: mdPath,
         title: 'Borderless',
-        desc: `Display Card without border (with shadow).`,
+        desc: `Display Card without border (with shadow-sm).`,
         component: <BorderLess />,
     },
     {
@@ -88,7 +88,7 @@ const demoApi = [
                 propName: 'bordered',
                 type: `<code>boolean</code>`,
                 default: `<code>false</code>`,
-                desc: 'Display Card with border (without shadow)',
+                desc: 'Display Card with border (without shadow-sm)',
             },
             {
                 propName: 'clickable',

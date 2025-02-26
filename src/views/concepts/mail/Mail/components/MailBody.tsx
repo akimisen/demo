@@ -32,7 +32,7 @@ const MailBody = () => {
         >
             <div className="flex flex-auto h-full">
                 <MailSidebar />
-                <div className="ltr:lg:pl-6 rtl:lg:pr-6 flex-1">
+                <div className="lg:ltr:pl-6 lg:rtl:pr-6 flex-1">
                     <MailBodyTop />
                     <div className="relative h-[calc(100%-70px)]">
                         {isEmpty(mail) ? (

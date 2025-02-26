@@ -40,7 +40,7 @@ const demoApi = [
                 propName: 'bordered',
                 type: `<code>boolean</code>`,
                 default: `<code>false</code>`,
-                desc: 'Display Card with border (without shadow)',
+                desc: 'Display Card with border (without shadow-sm)',
             },
             {
                 propName: 'clickable',

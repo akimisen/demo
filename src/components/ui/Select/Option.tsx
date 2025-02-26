@@ -19,7 +19,7 @@ const Option = <T,>(
                 'select-option',
                 !isDisabled &&
                     !isSelected &&
-                    'hover:text-gray-800 hover:dark:text-gray-100',
+                    'hover:text-gray-800 dark:hover:text-gray-100',
                 isSelected && 'text-primary bg-primary-subtle',
                 isDisabled && 'opacity-50 cursor-not-allowed',
             )}

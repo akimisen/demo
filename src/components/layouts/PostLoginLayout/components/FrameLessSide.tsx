@@ -82,7 +82,7 @@ const FrameLessSide = ({ children }: CommonProps) => {
                 {larger.lg && (
                     <SideNav
                         background={false}
-                        className={classNames('dark pt-6')}
+                        className={classNames('contrast-dark pt-6')}
                         contentClass="h-[calc(100vh-8rem)]"
                         mode="dark"
                     />
@@ -92,7 +92,7 @@ const FrameLessSide = ({ children }: CommonProps) => {
                         <Header
                             className={classNames(
                                 'rounded-t-2xl dark:bg-gray-900',
-                                isSticky && 'shadow !rounded-none',
+                                isSticky && 'shadow-sm rounded-none!',
                             )}
                             headerStart={
                                 <>

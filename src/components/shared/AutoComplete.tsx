@@ -43,7 +43,7 @@ const Item = ({
             id={id}
             aria-selected={active}
             {...rest}
-            className="select-option hover:text-gray-800 hover:dark:text-gray-100"
+            className="select-option hover:text-gray-800 dark:hover:text-gray-100"
         >
             {children}
         </div>

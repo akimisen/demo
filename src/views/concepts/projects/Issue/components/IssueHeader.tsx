@@ -16,7 +16,7 @@ const IssueHeader = () => {
                 <Tag>{issueData.ticketId}</Tag>
             </div>
             <input
-                className="h3 font-bold outline-none bg-transparent"
+                className="h3 font-bold outline-hidden bg-transparent"
                 defaultValue={issueData.title}
                 onBlur={(e) => handleTitleChange(e.target.value)}
             />

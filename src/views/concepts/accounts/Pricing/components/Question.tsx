@@ -20,7 +20,7 @@ const Question = (props: QuestionProps) => {
         <div
             className={classNames(
                 'flex flex-col w-full',
-                border && 'border-b gray-200 dark:border-gray-700',
+                border && 'border-b bordergray-200 dark:border-gray-700',
                 isFirstChild ? 'pb-6' : 'py-6',
             )}
         >

@@ -50,7 +50,7 @@ const ChatLandingView = () => {
         <div className="max-w-[900px] w-full mx-auto mt-20">
             <div>
                 <div className="heading-text text-4xl leading-snug">
-                    <span className="font-semibold bg-gradient-to-r from-indigo-500 to-red-400 bg-clip-text text-transparent text-5xl">
+                    <span className="font-semibold bg-linear-to-r from-indigo-500 to-red-400 bg-clip-text text-transparent text-5xl">
                         Hello, there
                     </span>
                     <br />

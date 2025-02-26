@@ -14,6 +14,16 @@ type LogProps = Omit<Log, 'updateContent'> & {
 
 const logData: Log[] = [
     {
+        version: '1.2.0',
+        date: '23 Feb 2025',
+        updateContent: [
+            `[Updated] Tailwind to version 4.`,
+            `[Updated] Various dependencies to their latest versions.`,
+            `[Changes] Applied layers to existing CSS.`,
+            `[Fixed] Minor styling issues`,
+        ],
+    },
+    {
         version: '1.1.2',
         date: '27 Jan 2025',
         updateContent: [

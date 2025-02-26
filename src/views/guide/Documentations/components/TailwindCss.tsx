@@ -44,7 +44,7 @@ const TailwindCss = () => {
                 To make any utility class important, simply add an{' '}
                 <code>!</code> character at the beginning, e.g.:
             </p>
-            <SyntaxHighlighter language="jsx">{`<Dropdown className="!bg-red-500" />`}</SyntaxHighlighter>
+            <SyntaxHighlighter language="jsx">{`<Dropdown className="bg-red-500!" />`}</SyntaxHighlighter>
             <p>
                 For more information on utility classes and Tailwind
                 configuration, visit the official documentation:{' '}
