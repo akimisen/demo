@@ -151,15 +151,16 @@
             "utilsDoc": "工具文档",
             "changeLog": "更新日志"
         },
-        "novels": {
-            "novels": "作品管理",
-            "outline": "大纲",
-            "content": "码字",
+        "novel": {
+            "caption": "作品管理",
+            "overview": "作品一览",
+            "outline": "编写大纲",
+            "content": "开始码字",
             "contentEditor": "编辑器",
             "contentAI": "AI扩写"
         },
         "inspiration": {
-            "inspiration": "灵感源泉",
+            "caption": "灵感源泉",
             "chat": "对话Deepseek",
             "image": "生成图片"
         },

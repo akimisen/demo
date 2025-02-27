@@ -1,5 +1,18 @@
 项目概述
-本项目是一个基于现有前端模板改造的写作助手应用，旨在为作者提供全方位的写作支持工具。通过接入AI技术，实现智能化的写作辅助、大纲管理和灵感激发功能，类似于市面上的Scrivener或Plottr等专业写作软件，但增加了AI赋能的特性。
+本项目是一个基于现有模板改造的写作助手应用，旨在为作者提供全方位的写作支持工具。通过接入AI技术，实现智能化的写作辅助、大纲管理和灵感激发功能，类似于市面上的Scrivener或Plottr等专业写作软件，但增加了AI赋能的特性。
+
+任务清单：
+| 任务编号 | 模块          | 任务概述                                         | 完成度%   |
+|----|---------------|--------------------------------------------------|--------|
+| 1  | novel-api     | 如何设计数据结构，增删改api                                 | 0 |
+| 2  | novel-outline  | 实现novel outline视图（列表，表格，时间线，故事板）    | 0 |
+| 3  | novel—editor   | 实现novel editor视图，增删改api                 | 0 |
+| 4  | kanban-writingcalendar | 添加按钮：新增任务，查看全部 | 80 |
+| 5  | kanban-novelboard | 优化样式：设置空封面null.png；图片对齐文字 | 70 |
+| 7  | novel-editor-tool | 起名小工具-ai版，大纲及章节概要打包作为context提交 | 0 |
+| 8  | kanban      | kanban，如何设置灰色背景             | 0 |
+| 9  | nav-icon     | navigation tree中的icon如何配置             | 10 |
+| 10 | novel-api-userNovels  | 输出数据按作品进度排序，施工中>规划中>已完结 | 0 |
 
 gantt
     title 写作助手应用开发路线图
@@ -174,10 +187,3 @@ v0.5.0 (当前版本 - 2025-02-26)
 实现大纲功能基础版
 完成正文编辑器基础版
 
-任务清单：
--完善novel api，实现novel表格视图
--实现novel outline视图，增删改api
--实现novel editor视图，增删改api
--看板-writingcalendar，添加按钮：新增任务，查看全部
--看板-novelslist v2，优化样式：设置null封面；封面图片对齐
--看板-writingdashboard，如何设置灰色

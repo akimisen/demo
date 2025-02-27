@@ -19,6 +19,14 @@ export default defineConfig({
         changeOrigin: true,
         secure: false
       }
+    },
+    watch: {
+      // 忽略特定文件
+      ignored: [
+        '**/.specstory/**',
+        '**/node_modules/**',
+        // 添加其他需要忽略的文件或目录
+      ]
     }
   },
   build: {

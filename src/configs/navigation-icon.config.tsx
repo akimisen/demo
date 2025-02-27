@@ -87,12 +87,20 @@ import {
     PiToolboxDuotone,
     PiCodeDuotone,
     PiPasswordDuotone,
+    PiHouseDuotone,
 } from 'react-icons/pi'
 import type { JSX } from 'react'
 
 export type NavigationIcons = Record<string, JSX.Element>
 
 const navigationIcon: NavigationIcons = {
+    kanban: <PiHouseDuotone />,
+    novel: <PiBookDuotone />,
+    outline: <PiListChecksDuotone />,
+    content: <PiTextIndentDuotone />,
+    editor: <PiPencilSimpleLineDuotone />,
+    inspiration: <PiLightbulbDuotone />,
+
     uiComponents: <PiPuzzlePieceDuotone />,
     common: <PiSwatchesDuotone />,
     uiCommonButton: <PiCursorClickDuotone />,

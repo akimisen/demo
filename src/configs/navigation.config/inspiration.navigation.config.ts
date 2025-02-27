@@ -11,7 +11,7 @@ const inspirationNavigationConfig: NavigationTree[] = [
         key: 'inspiration',
         path: '',
         title: '灵感源泉',
-        translateKey: 'nav.inspiration.inspiration',
+        translateKey: 'nav.inspiration.caption',
         icon: 'ai',
         type: NAV_ITEM_TYPE_TITLE,
         authority: [ADMIN, USER],

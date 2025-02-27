@@ -1,10 +1,80 @@
 import { mock } from '../MockAdapter'
+import dayjs from 'dayjs'
+
+// 获取当前日期的格式化字符串 (YYYY-MM-DD)
+const getCurrentDateString = () => {
+    return dayjs().format('YYYY-MM-DD')
+}
+
+// 生成混合图表数据的辅助函数
+const generateMixedChartData = (days: number, isDaily: boolean) => {
+    const wordCountData = []
+    const speedData = []
+    const labels = []
+    const today = new Date()
+    
+    // 从今天开始往前推days-1天
+    for (let i = days - 1; i >= 0; i--) {
+        const day = new Date(today)
+        day.setDate(today.getDate() - i)
+        labels.push(day.toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' }))
+        
+        // 字数数据 - 柱状图 (日均1000-4000字)
+        wordCountData.push(Math.round(1000 + Math.random() * 3000))
+        
+        // 速度数据 - 折线图 (每小时20-50字)
+        speedData.push(Math.round(20 + Math.random() * 30))
+    }
+    
+    // 计算总字数
+    const totalWordCount = wordCountData.reduce((sum, val) => sum + val, 0)
+    
+    // 计算平均速度
+    const avgSpeed = Math.round(speedData.reduce((sum, val) => sum + val, 0) / speedData.length)
+    
+    return {
+        wordCount: {
+            // 日视图显示当日字数，周视图显示累计字数
+            total: isDaily ? wordCountData[wordCountData.length - 1] : totalWordCount,
+            data: wordCountData
+        },
+        writingSpeed: {
+            total: avgSpeed,
+            data: speedData
+        },
+        labels
+    }
+}
+
+const currentDate = getCurrentDateString()
 
 const writingDashboardData = {
     stats: {
-        todayWordCount: 3500,
-        writingSpeed: 35,
-        toBeDecided: 15
+        daily: {
+            ...generateMixedChartData(7, true),
+            toBeDecided: 15,
+            wordCountGrowth: 12.5,
+            speedGrowth: 8.3,
+            toBeDecidedGrowth: -5.2,
+            compareFrom: '较昨日'
+        },
+        weekly: {
+            ...generateMixedChartData(7, false),
+            toBeDecided: 45,
+            wordCountGrowth: 8.7,
+            speedGrowth: 5.1,
+            toBeDecidedGrowth: 2.3,
+            compareFrom: '较上周'
+        },
+        // 暂时注释掉月度数据
+        // monthly: {
+        //     ...generateMixedChartData(30),
+        //     toBeDecided: 120,
+        //     wordCountGrowth: 15.2,
+        //     speedGrowth: -2.5,
+        //     toBeDecidedGrowth: 10.8,
+        //     compareFrom: '较上月'
+        // }
     },
     radarData: {
         categories: ['情节', '人物', '文笔', '设定', '爽感', '速度'],
@@ -16,21 +86,24 @@ const writingDashboardData = {
             title: '完成第三章修改',
             type: 'writing',
             time: '10:00',
-            description: '重点修改男主角的性格描写'
+            description: '重点修改男主角的性格描写',
+            date: currentDate
         },
         {
             id: '2',
             title: '大纲规划',
             type: 'planning',
             time: '14:00',
-            description: '规划下一卷的主要情节'
+            description: '规划下一卷的主要情节',
+            date: currentDate
         },
         {
             id: '3',
             title: '每日码字目标',
             type: 'goal',
             time: '16:00',
-            description: '目标3000字'
+            description: '目标3000字',
+            date: currentDate
         }
     ],
     novels: [
@@ -56,7 +129,7 @@ const writingDashboardData = {
             latestChapter: '第十五章：魔法的秘密',
             status: 'completed',
             lastUpdated: '2024-03-15',
-            progress: 100,
+            progress: 10,
             cover: '/img/avatars/thumb-2.jpg',
             genre: '奇幻',
             summary: '记录魔法世界千年历史的编年史诗',

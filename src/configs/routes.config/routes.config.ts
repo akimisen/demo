@@ -1,5 +1,5 @@
 import kanbanRoute from './kanbanRoute'
-import novelsRoute from './novelsRoute'
+import novelRoute from './novelRoute'
 import inspirationRoute from './inspirationRoute' 
 import dashboardsRoute from './dashboardsRoute'
 import conceptsRoute from './conceptsRoute'
@@ -15,7 +15,7 @@ export const publicRoutes: Routes = [...authRoute]
 export const protectedRoutes: Routes = [
     ...dashboardsRoute,
     ...kanbanRoute,
-    ...novelsRoute,
+    ...novelRoute,
     ...inspirationRoute,
     ...conceptsRoute,
     ...uiComponentsRoute,

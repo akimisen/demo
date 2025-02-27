@@ -11,7 +11,7 @@ const WritingRadar = ({ data }: WritingRadarProps) => {
     return (
         <Card>
             <div className="flex items-center justify-between mb-4 px-1">
-                <h4 className="m-0">能力面板</h4>
+                <h4 className="m-0">技能面板</h4>
             </div>
             <div className="mt-6">
                 <Chart
@@ -39,7 +39,7 @@ const WritingRadar = ({ data }: WritingRadarProps) => {
                     }}
                     series={[
                         {
-                            name: '能力面板',
+                            name: '技能面板',
                             data: data.series,
                         },
                     ]}

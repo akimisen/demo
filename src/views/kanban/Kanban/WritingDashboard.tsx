@@ -7,10 +7,10 @@ import { WritingDashboardResponse } from './types'
 import WritingStats from './components/WritingStats'
 import WritingCalendar from './components/WritingCalendar'
 // import NovelsList from './components/NovelsList'
-import NovelsBoard from './components/NovelsBoard'
+import NovelBoard from './components/NovelBoard'
 import WritingRadar from './components/WritingRadar'
 
-const Kanban = () => {
+const WritingDashboard = () => {
     const { data, isLoading } = useSWR(
         ['/api/kanban'],
         () => apiGetWritingDashboard<WritingDashboardResponse>(),
@@ -24,23 +24,17 @@ const Kanban = () => {
     return (
         <Loading loading={isLoading}>
             {data && (
-                <div className="flex flex-col gap-4">
-                    <div className="grid grid-cols-1 xl:grid-cols-4 gap-4">
-                        <div className="xl:col-span-3">
-                            <WritingStats data={data.stats} />
-                            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="md:col-span-2">
-                                <NovelsBoard data={data.novels} />
+                <div>
+                    <div className="flex flex-col gap-4 max-w-full overflow-x-hidden">
+                        <div className="flex flex-col xl:flex-row gap-4">
+                            <div className="flex flex-col gap-4 flex-1 xl:col-span-3">
+                                <WritingStats data={data.stats} />
+                                <NovelBoard data={data.novels} />
                             </div>
-                            <div className="md:col-span-1">
-                                <WritingRadar 
-                                data={data.radarData}
-                            />
+                            <div className="flex flex-col gap-4 2xl:min-w-[360px]">
+                                <WritingCalendar schedules={data.schedules} />
+                                <WritingRadar data={data.radarData} />
                             </div>
-                        </div>
-                        </div>
-                        <div className="xl:col-span-1">
-                            <WritingCalendar schedules={data.schedules} />  
                         </div>
                     </div>
                 </div>
@@ -49,4 +43,4 @@ const Kanban = () => {
     )
 }
 
-export default Kanban
+export default WritingDashboard

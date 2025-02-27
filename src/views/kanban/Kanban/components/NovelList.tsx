@@ -16,11 +16,11 @@ type Novel = {
     cover?: string
 }
 
-type NovelsListProps = {
+type NovelListProps = {
     data: Novel[]
 }
 
-const NovelsList = ({ data }: NovelsListProps) => {
+const NovelList = ({ data }: NovelListProps) => {
     const navigate = useNavigate()
 
     const handleViewAll = () => {
@@ -94,4 +94,4 @@ const NovelsList = ({ data }: NovelsListProps) => {
     )
 }
 
-export default NovelsList 
+export default NovelList 

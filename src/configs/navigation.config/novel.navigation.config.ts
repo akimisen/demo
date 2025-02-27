@@ -1,4 +1,4 @@
-import { NOVELS_PREFIX_PATH } from '@/constants/route.constant'
+import { NOVEL_PREFIX_PATH } from '@/constants/route.constant'
 import {
     NAV_ITEM_TYPE_TITLE,
     NAV_ITEM_TYPE_COLLAPSE,
@@ -7,50 +7,60 @@ import {
 import { ADMIN, USER } from '@/constants/roles.constant'
 import type { NavigationTree } from '@/@types/navigation'
 
-const novelsNavigationConfig: NavigationTree[] = [
+const novelNavigationConfig: NavigationTree[] = [
     {
-        key: 'novels',
+        key: 'novel',
         path: '',
         title: '作品管理',
-        translateKey: 'nav.novels.novels',
-        icon: 'novels',
+        translateKey: 'nav.novel.caption',
+        icon: 'novel',
         type: NAV_ITEM_TYPE_TITLE,
         authority: [ADMIN, USER],
         subMenu: [
             {
-                key: 'novels.outline',
+                key: 'novel.overview',
                 path: '',
-                title: '大纲',
-                translateKey: 'nav.novels.outline',
+                title: '作品一览',
+                translateKey: 'nav.novel.overview',
                 icon: 'outline',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
                 subMenu: [],
             },
             {
-                key: 'novels.content',
+                key: 'novel.outline',
                 path: '',
-                title: '码字',
-                translateKey: 'nav.novels.content',
+                title: '编写大纲',
+                translateKey: 'nav.novel.outline',
+                icon: 'outline',
+                type: NAV_ITEM_TYPE_COLLAPSE,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+            {
+                key: 'novel.content',
+                path: '',
+                title: '开始码字',
+                translateKey: 'nav.novel.content',
                 icon: 'content',
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [ADMIN, USER],
                 subMenu: [
                     {
-                        key: 'novels.content.editor',
-                        path: `${NOVELS_PREFIX_PATH}/content/editor`,
+                        key: 'novel.content.editor',
+                        path: `${NOVEL_PREFIX_PATH}/content/editor`,
                         title: '编辑器',
-                        translateKey: 'nav.novels.contentEditor',
+                        translateKey: 'nav.novel.contentEditor',
                         icon: 'editor',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],
                         subMenu: [],
                     },
                     {
-                        key: 'novels.content.ai',
-                        path: `${NOVELS_PREFIX_PATH}/content/ai`,
+                        key: 'novel.content.ai',
+                        path: `${NOVEL_PREFIX_PATH}/content/ai`,
                         title: 'AI扩写',
-                        translateKey: 'nav.novels.contentAI',
+                        translateKey: 'nav.novel.contentAI',
                         icon: 'ai',
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [ADMIN, USER],
@@ -62,4 +72,4 @@ const novelsNavigationConfig: NavigationTree[] = [
     },
 ]
 
-export default novelsNavigationConfig 
+export default novelNavigationConfig 

@@ -61,20 +61,46 @@ export type GetProjectDashboardResponse = {
 }
 
 // Writing 相关的新类型
-export type Novel = {
-    id: string
-    title: string
-    wordCount: number
-    latestChapter: string
-    status: 'ongoing' | 'completed' | 'planned'
-    lastUpdated: string
-    progress: number
-    cover?: string
-    genre?: string
-    summary?: string
-    protagonist?: string
-    setting?: string
-    targetAudience?: string
+export type Period = 'daily' | 'weekly' // | 'monthly' // 暂时注释掉月度数据
+export type StatisticCategory = 'wordCount' | 'writingSpeed' | 'toBeDecided'
+
+export type MetricData = {
+    total: number
+    data: number[]
+}
+
+export type PeriodData = {
+    wordCount: MetricData
+    writingSpeed: MetricData
+    toBeDecided: number
+    wordCountGrowth: number
+    speedGrowth: number
+    toBeDecidedGrowth: number
+    compareFrom: string
+    labels: string[]
+}
+
+export type CategoryData = {
+    daily: {
+        chartData: ChartData
+    }
+    weekly: {
+        chartData: ChartData
+    }
+    monthly: {
+        chartData: ChartData
+    }
+}
+
+export type WritingStats = {
+    daily: PeriodData
+    weekly: PeriodData
+    // monthly: PeriodData // 暂时注释掉月度数据
+}
+
+export type WritingRadarData = {
+    categories: string[]
+    series: number[]
 }
 
 export type WritingSchedule = {
@@ -83,17 +109,23 @@ export type WritingSchedule = {
     type: 'writing' | 'planning' | 'review' | 'goal'
     time?: string
     description?: string
+    date?: string
 }
 
-export type WritingStats = {
-    todayWordCount: number
-    writingSpeed: number
-    toBeDecided: number
-}
-
-export type WritingRadarData = {
-    categories: string[]
-    series: number[]
+export type Novel = {
+    id: string
+    title: string
+    wordCount: number
+    latestChapter: string
+    status: 'ongoing' | 'completed' | 'planned'
+    lastUpdated: string
+    progress: number
+    cover: string
+    genre?: string
+    summary?: string
+    protagonist?: string
+    setting?: string
+    targetAudience?: string
 }
 
 export type WritingDashboardResponse = {
