@@ -12,7 +12,7 @@ const inspirationNavigationConfig: NavigationTree[] = [
         path: '',
         title: '灵感源泉',
         translateKey: 'nav.inspiration.caption',
-        icon: 'ai',
+        // icon: '',
         type: NAV_ITEM_TYPE_TITLE,
         authority: [ADMIN, USER],
         subMenu: [
@@ -21,7 +21,7 @@ const inspirationNavigationConfig: NavigationTree[] = [
                 path: `${INSPIRATION_PREFIX_PATH}/chat`,
                 title: '对话Deepseek',
                 translateKey: 'nav.inspiration.chat',
-                icon: 'aiChat',
+                icon: 'inspirationChat',
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN, USER],
                 subMenu: [],
@@ -31,13 +31,23 @@ const inspirationNavigationConfig: NavigationTree[] = [
                 path: `${INSPIRATION_PREFIX_PATH}/image`,
                 title: '生成图片',
                 translateKey: 'nav.inspiration.image',
-                icon: 'aiImage',
+                icon: 'inspirationImage',
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN, USER],
                 subMenu: [],
-            }
-        ]
-    }
+            },
+            {
+                key: 'inspiration.summary',
+                path: `${INSPIRATION_PREFIX_PATH}/summary`,
+                title: 'AI拆书',
+                translateKey: 'nav.inspiration.summary',
+                icon: 'inspirationSummary',
+                type: NAV_ITEM_TYPE_ITEM,
+                authority: [ADMIN, USER],
+                subMenu: [],
+            },
+        ],
+    },
 ]
 
 export default inspirationNavigationConfig

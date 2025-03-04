@@ -14,6 +14,11 @@
 | 9  | nav-icon     | navigation tree中的icon如何配置             | 10 |
 | 10 | novel-api-userNovels  | 输出数据按作品进度排序，施工中>规划中>已完结 | 0 |
 
+
+ideas:
+1.后端采用mongo储存数据，本地采用json文件，这样两者数据结构实质上保持一致，方便统一管理和导入导出。文档格式可以参考plottr
+
+
 gantt
     title 写作助手应用开发路线图
     dateFormat  YYYY-MM
