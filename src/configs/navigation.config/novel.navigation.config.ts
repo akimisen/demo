@@ -33,7 +33,7 @@ const novelNavigationConfig: NavigationTree[] = [
                 title: '编写大纲',
                 translateKey: 'nav.novel.outline',
                 icon: 'novelOutline',
-                type: NAV_ITEM_TYPE_COLLAPSE,
+                type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN, USER],
                 subMenu: [],
             },
