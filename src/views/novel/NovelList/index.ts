@@ -1,3 +1,3 @@
-import ProjectDashboard from './ProjectDashboard'
+import NovelList from './NovelList'
 
-export default ProjectDashboard
+export default NovelList

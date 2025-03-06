@@ -98,7 +98,7 @@ export type NavigationIcons = Record<string, JSX.Element>
 
 const navigationIcon: NavigationIcons = {
     kanban: <PiHouseDuotone />, //home页
-    novelOverview: <PiBookDuotone />,
+    novelList: <PiBookDuotone />,
     novelOutline: <PiGraphDuotone />,
     novelContent: <PiPencilCircleDuotone />,
     // editor: <PiPencilSimpleLineDuotone />,

@@ -11,7 +11,6 @@ const kanbanRoute: Routes = [
         authority: [ADMIN, USER],
         meta: {
             pageContainerType: 'contained',
-            pageBackgroundType: 'plain',
         },
     },
 ]
