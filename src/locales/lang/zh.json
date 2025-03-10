@@ -156,7 +156,7 @@
         },
         "novel": {
             "caption": "作品管理",
-            "overview": "作品一览",
+            "list": "作品一览",
             "outline": "编写大纲",
             "content": "开始码字"
         },

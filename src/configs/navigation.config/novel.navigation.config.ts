@@ -18,11 +18,11 @@ const novelNavigationConfig: NavigationTree[] = [
         authority: [ADMIN, USER],
         subMenu: [
             {
-                key: 'novel.overview',
+                key: 'novel.list',
                 path: '',
                 title: '作品一览',
-                translateKey: 'nav.novel.overview',
-                icon: 'novelOverview',
+                translateKey: 'nav.novel.list',
+                icon: 'novelList',
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN, USER],
                 subMenu: [],
@@ -45,28 +45,7 @@ const novelNavigationConfig: NavigationTree[] = [
                 icon: 'novelContent',
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [ADMIN, USER],
-                subMenu: [
-                    // {
-                    //     key: 'novel.content.editor',
-                    //     path: `${NOVEL_PREFIX_PATH}/content/editor`,
-                    //     title: '编辑器',
-                    //     translateKey: 'nav.novel.contentEditor',
-                    //     icon: 'editor',
-                    //     type: NAV_ITEM_TYPE_ITEM,
-                    //     authority: [ADMIN, USER],
-                    //     subMenu: [],
-                    // },
-                    // {
-                    //     key: 'novel.content.ai',
-                    //     path: `${NOVEL_PREFIX_PATH}/content/ai`,
-                    //     title: 'AI扩写',
-                    //     translateKey: 'nav.novel.contentAI',
-                    //     icon: 'ai',
-                    //     type: NAV_ITEM_TYPE_ITEM,
-                    //     authority: [ADMIN, USER],
-                    //     subMenu: [],
-                    // }
-                ]
+                subMenu: []
             },
         ],
     },
