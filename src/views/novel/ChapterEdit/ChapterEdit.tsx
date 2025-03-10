@@ -4,14 +4,15 @@ import Button from '@/components/ui/Button'
 import Notification from '@/components/ui/Notification'
 import toast from '@/components/ui/toast'
 import ConfirmDialog from '@/components/shared/ConfirmDialog'
-import ProductForm from '../ProductForm'
+import ChapterForm from '../ChapterForm'
 import NoProductFound from '@/assets/svg/NoProductFound'
 import { apiGetProduct } from '@/services/ProductService'
 import sleep from '@/utils/sleep'
 import { TbTrash, TbArrowNarrowLeft } from 'react-icons/tb'
 import { useParams, useNavigate } from 'react-router-dom'
 import useSWR from 'swr'
-import type { Product, ProductFormSchema } from '../ProductForm/types'
+import type { Chapter, ChapterFormSchema } from '../ChapterForm/types'
+import { apiGetChapterDetail } from '@/services/NovelService'
 
 const ProducEdit = () => {
     const { id } = useParams()
@@ -19,9 +20,9 @@ const ProducEdit = () => {
     const navigate = useNavigate()
 
     const { data, isLoading } = useSWR(
-        [`/api/product/${id}`, { id: id as string }],
+        [`/api/chapter/${id}`, { id: id as string }],
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        ([_, params]) => apiGetProduct<Product, { id: string }>(params),
+        ([_, params]) => apiGetChapterDetail<Chapter>(params.id, id as string),
         {
             revalidateOnFocus: false,
             revalidateIfStale: false,
@@ -35,37 +36,29 @@ const ProducEdit = () => {
     const getDefaultValues = () => {
         if (data) {
             const {
-                name,
-                description,
-                productCode,
-                taxRate,
-                price,
-                bulkDiscountPrice,
-                costPerItem,
-                imgList,
-                category,
-                brand,
+                title,
+                summary,
+                text,
+                characters,
+                locations,
+                tags,
+                notes
             } = data
 
             return {
-                name,
-                description,
-                productCode,
-                taxRate,
-                price,
-                bulkDiscountPrice,
-                costPerItem,
-                imgList,
-                category,
-                tags: [{ label: 'trend', value: 'trend' }],
-                brand,
+                title,
+                summary: summary || '',
+                text,
+                characters,
+                locations,
+                tags,
+                notes
             }
         }
-
         return {}
     }
 
-    const handleFormSubmit = async (values: ProductFormSchema) => {
+    const handleFormSubmit = async (values: ChapterFormSchema) => {
         console.log('Submitted values', values)
         setIsSubmiting(true)
         await sleep(800)
@@ -107,9 +100,9 @@ const ProducEdit = () => {
             )}
             {!isLoading && data && (
                 <>
-                    <ProductForm
-                        defaultValues={getDefaultValues() as ProductFormSchema}
-                        newProduct={false}
+                    <ChapterForm
+                        defaultValues={getDefaultValues() as ChapterFormSchema}
+                        newChapter={false}
                         onFormSubmit={handleFormSubmit}
                     >
                         <Container>
@@ -145,7 +138,7 @@ const ProducEdit = () => {
                                 </div>
                             </div>
                         </Container>
-                    </ProductForm>
+                    </ChapterForm>
                     <ConfirmDialog
                         isOpen={deleteConfirmationOpen}
                         type="danger"

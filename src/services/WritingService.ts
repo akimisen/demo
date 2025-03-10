@@ -9,7 +9,7 @@ export async function apiGetWritingDashboard<T>() {
 
 export async function apiGetNovels<T>() {
     return ApiService.fetchDataWithAxios<T>({
-        url: '/api/novels',
+        url: '/api/kanban-novels',
         method: 'get',
     })
 }
@@ -19,7 +19,7 @@ export async function apiGetNovel<T, U extends Record<string, unknown>>({
     ...params
 }: U) {
     return ApiService.fetchDataWithAxios<T>({
-        url: `/api/novels/${id}`,
+        url: `/api/kanban-novels/${id}`,
         method: 'get',
         params,
     })

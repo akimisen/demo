@@ -1,9 +1,12 @@
 import ApiService from './ApiService'
 
-export async function apiGetNovelsList<T>() {
+export async function apiGetNovelList<T, U extends Record<string, unknown>>(
+    params: U,
+) {
     return ApiService.fetchDataWithAxios<T>({
         url: '/novels',
         method: 'get',
+        params,
     })
 }
 

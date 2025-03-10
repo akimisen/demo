@@ -3246,6 +3246,288 @@ _**Assistant**_
 
 
 
+
+
+<thinking>
+是的，Swagger UI是FastAPI内置的功能。FastAPI使用OpenAPI（以前称为Swagger规范）来自动生成API文档。这些文档是根据您的路由定义、函数参数、类型注解和文档字符串自动生成的。
+
+FastAPI使用Pydantic模型和Python类型注解来生成OpenAPI规范，然后使用Swagger UI或ReDoc来可视化这些规范。这使得开发者可以轻松地创建自动记录的API。
+</thinking>
+
+# FastAPI的API文档生成机制
+
+是的，Swagger UI是FastAPI内置的功能。FastAPI自动为您的API生成交互式文档，无需额外配置。
+
+## FastAPI文档生成原理
+
+FastAPI的API文档是基于以下几个关键技术自动生成的：
+
+1. **OpenAPI规范**：FastAPI遵循OpenAPI规范（以前称为Swagger规范），这是一个用于描述RESTful API的标准。
+
+2. **Python类型注解**：FastAPI利用Python的类型注解系统来推断API参数和返回值的类型。
+
+3. **Pydantic模型**：FastAPI使用Pydantic模型来验证、序列化和记录请求和响应数据。
+
+4. **文档字符串**：函数的文档字符串被用作API端点的描述。
+
+## 文档生成过程
+
+当您定义一个FastAPI路由时，以下信息会被用来生成文档：
+
+```python
+@app.post("/novels", response_model=NovelResponse, status_code=status.HTTP_201_CREATED)
+async def create_novel(
+    novel: NovelCreate,  # Pydantic模型作为请求体
+    current_user = Depends(get_current_user)  # 依赖项
+):
+    """
+    创建新小说
+    
+    这个文档字符串会成为API描述
+    """
+    return await novel_service.create_novel(novel.dict(), current_user["id"])
+```
+
+在这个例子中：
+
+- 路径`/novels`和HTTP方法`POST`定义了API端点
+- `response_model=NovelResponse`定义了响应的结构
+- `novel: NovelCreate`定义了请求体的结构
+- 函数的文档字符串提供了API的描述
+- `status_code`定义了成功响应的HTTP状态码
+
+## 内置文档UI
+
+FastAPI提供了两种内置的文档UI：
+
+1. **Swagger UI**：默认位于`/docs`路径，提供交互式文档，允许直接测试API
+2. **ReDoc**：默认位于`/redoc`路径，提供更清晰的只读文档
+
+## 自定义文档
+
+您可以通过以下方式自定义文档：
+
+1. **修改路径**：在创建FastAPI应用时指定文档URL
+   ```python
+   app = FastAPI(docs_url="/api-docs", redoc_url="/api-redoc")
+   ```
+
+2. **添加标签**：组织API端点
+   ```python
+   @app.post("/novels", tags=["小说"])
+   ```
+
+3. **添加元数据**：在FastAPI应用创建时添加
+   ```python
+   app = FastAPI(
+       title="小说写作助手",
+       description="帮助作家创作和管理小说的API",
+       version="1.0.0"
+   )
+   ```
+
+4. **详细的端点描述**：使用更丰富的文档字符串
+   ```python
+   @app.post("/novels")
+   async def create_novel(novel: NovelCreate):
+       """
+       创建新小说
+       
+       ## 描述
+       这个端点允许用户创建一个新的小说项目
+       
+       ## 参数
+       - **novel**: 小说创建模型，包含标题、摘要等信息
+       
+       ## 返回
+       返回创建的小说详情，包括自动生成的ID
+       """
+   ```
+
+## 总结
+
+FastAPI的文档生成是其最强大的特性之一，它通过利用Python的类型注解和Pydantic模型，自动生成符合OpenAPI规范的API文档，并提供Swagger UI和ReDoc两种交互式界面来浏览和测试API。这大大减少了维护API文档的工作量，并确保文档始终与代码保持同步。
+
+---
+
+_**User**_
+
+@PlotlineView.tsx @NovelOutline.tsx 帮我修改这里的plotline
+
+---
+
+_**Assistant**_
+
+
+
+
+
+<thinking>
+我需要修改PlotlineView组件和NovelOutline组件中与情节线相关的部分。从提供的代码中，我可以看到NovelOutline.tsx是一个包含多个视图的组件，其中包括PlotlineView。
+
+在之前的代码中，PlotlineView组件接受chapters、characters和plots作为props，但在NovelOutline.tsx中调用PlotlineView时没有传递这些props。我需要修改这两个组件，使它们能够正确地协同工作。
+
+我将需要：
+1. 在NovelOutline.tsx中添加获取章节、角色和情节数据的逻辑
+2. 将这些数据传递给PlotlineView组件
+3. 确保PlotlineView能够正确处理这些数据
+</thinking>
+
+# 修改情节线视图
+
+我将修改两个文件，使情节线视图能够正确显示数据。
+
+## 1. 修改 NovelOutline.tsx
+
+```typescript:src/views/novel/NovelOutline/NovelOutline.tsx
+import React, { useState, useEffect } from 'react';
+import Tabs from '@/components/ui/Tabs';
+import TableView from './components/TableView';
+import StoryboardView from './components/StoryboardView';
+import PlotlineView from './components/PlotlineView';
+import CharacterSheet from './components/CharacterSheet';
+import LocationMap from './components/LocationMap';
+import { useParams } from 'react-router-dom';
+import { useToast } from '@/components/ui/Toast';
+
+const { TabNav, TabList, TabContent } = Tabs;
+
+// 临时模拟数据 - 实际应用中应从API获取
+const mockChapters = [
+  { id: 'ch1', title: '第一章：开始' },
+  { id: 'ch2', title: '第二章：冲突' },
+  { id: 'ch3', title: '第三章：高潮' },
+  { id: 'ch4', title: '第四章：结局' },
+];
+
+const mockCharacters = [
+  { id: 'char1', name: '主角', color: '#4f46e5' },
+  { id: 'char2', name: '配角', color: '#10b981' },
+  { id: 'char3', name: '反派', color: '#ef4444' },
+];
+
+const mockPlots = [
+  { id: 'plot1', title: '初遇', chapterId: 'ch1', characterIds: ['char1', 'char2'] },
+  { id: 'plot2', title: '冲突', chapterId: 'ch2', characterIds: ['char1', 'char3'] },
+  { id: 'plot3', title: '联手', chapterId: 'ch2', characterIds: ['char1', 'char2'] },
+  { id: 'plot4', title: '决战', chapterId: 'ch3', characterIds: ['char1', 'char2', 'char3'] },
+  { id: 'plot5', title: '胜利', chapterId: 'ch4', characterIds: ['char1', 'char2'] },
+];
+
+const NovelOutline: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('table');
+  const [chapters, setChapters] = useState(mockChapters);
+  const [characters, setCharacters] = useState(mockCharacters);
+  const [plots, setPlots] = useState(mockPlots);
+  const [loading, setLoading] = useState(false);
+  const { novelId } = useParams<{ novelId: string }>();
+  const toast = useToast();
+
+  // 获取小说大纲数据
+  useEffect(() => {
+    const fetchNovelData = async () => {
+      if (!novelId) return;
+      
+      setLoading(true);
+      try {
+        // 实际应用中应从API获取数据
+        // const response = await fetch(`/api/novels/${novelId}/outline`);
+        // const data = await response.json();
+        // setChapters(data.chapters);
+        // setCharacters(data.characters);
+        // setPlots(data.plots);
+        
+        // 使用模拟数据
+        setChapters(mockChapters);
+        setCharacters(mockCharacters);
+        setPlots(mockPlots);
+      } catch (error) {
+        console.error('获取小说数据失败:', error);
+        toast.error('获取小说数据失败，请重试');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNovelData();
+  }, [novelId, toast]);
+
+  return (
+    <div className="novel-outline">
+      <Tabs value={activeTab} onChange={(val) => setActiveTab(val)}>
+        <TabList>
+          <TabNav value="table">表格视图</TabNav>
+          <TabNav value="plotline">情节线</TabNav>
+          <TabNav value="storyboard">故事板</TabNav>
+          <TabNav value="characters">人物</TabNav>
+          <TabNav value="locations">地点</TabNav>
+        </TabList>
+        <div className="mt-4">
+          {loading ? (
+            <div className="flex justify-center py-8">加载中...</div>
+          ) : (
+            <>
+              <TabContent value="table">
+                <TableView />
+              </TabContent>
+              <TabContent value="plotline">
+                <PlotlineView 
+                  chapters={chapters} 
+                  characters={characters} 
+                  plots={plots} 
+                />
+              </TabContent>
+              <TabContent value="storyboard">
+                <StoryboardView />
+              </TabContent>
+              <TabContent value="characters">
+                <CharacterSheet />
+              </TabContent>
+              <TabContent value="locations">
+                <LocationMap />
+              </TabContent>
+            </>
+          )}
+        </div>
+      </Tabs>
+    </div>
+  );
+};
+
+export default NovelOutline;
+```
+
+
+## 2. 修改 PlotlineView.tsx
+
+```typescript:src/views/novel/NovelOutline/components/PlotlineView.tsx
+import React, { useState } from 'react';
+import Timeline from '@/components/ui/Timeline';
+import Button from '@/components/ui/Button';
+import Dialog from '@/components/ui/Dialog';
+import { PlusIcon } from '@heroicons/react/24/outline';
+
+// 自定义水平时间线样式
+const horizontalTimelineStyles = `
+  .horizontal-timeline {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .horizontal-timeline .timeline-item {
+    flex-direction: column;
+    min-height: auto;
+    min-width: 150px;
+  }
+
+  .horizontal-timeline .timeline-item-wrapper {
+    flex-direction: column;
+  }
+
+  .horizontal-timeline .timeline-
+
 ---
 
 

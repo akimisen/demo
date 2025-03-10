@@ -1,10 +1,10 @@
-import { signInWithFirebaseGoogle } from './firebase/FirebaseGoogleAuth'
-import { signInWithFirebaseGithub } from './firebase/FirebaseGithubAuth'
-
+// 模拟的 OAuth 服务实现
 export async function apiGoogleOauthSignIn() {
-    return await signInWithFirebaseGoogle()
+  console.log('Google OAuth sign-in is disabled');
+  return null;
 }
 
 export async function apiGithubOauthSignIn() {
-    return await signInWithFirebaseGithub()
+  console.log('Github OAuth sign-in is disabled');
+  return null;
 }

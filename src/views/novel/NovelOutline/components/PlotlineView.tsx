@@ -1,6 +1,5 @@
 import React from 'react';
 import Timeline from '@/components/ui/Timeline';
-import classNames from 'classnames';
 
 // 自定义水平时间线样式
 const horizontalTimelineStyles = `
@@ -62,13 +61,13 @@ type Plot = {
   characterIds: string[];
 };
 
-type LoglineProps = {
+type PlotlineViewProps = {
   chapters: Chapter[];
   characters: Character[];
   plots: Plot[];
 };
 
-const LoglineView = ({ chapters, characters, plots }: LoglineProps) => {
+const PlotlineView: React.FC<PlotlineViewProps> = ({ chapters, characters, plots }) => {
   return (
     <>
       <style>{horizontalTimelineStyles}</style>
@@ -76,7 +75,7 @@ const LoglineView = ({ chapters, characters, plots }: LoglineProps) => {
       <div className="mb-4">
         {/* 章节标题行 */}
         <Timeline className="horizontal-timeline">
-          {chapters.map((chapter, index) => (
+          {chapters.map((chapter) => (
             <Timeline.Item 
               key={chapter.id}
               className="chapter-item"
@@ -130,4 +129,4 @@ const LoglineView = ({ chapters, characters, plots }: LoglineProps) => {
   );
 };
 
-export default LoglineView; 
+export default PlotlineView; 

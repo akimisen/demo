@@ -1,7 +1,6 @@
 import { NOVEL_PREFIX_PATH } from '@/constants/route.constant'
 import {
     NAV_ITEM_TYPE_TITLE,
-    NAV_ITEM_TYPE_COLLAPSE,
     NAV_ITEM_TYPE_ITEM,
 } from '@/constants/navigation.constant'
 import { ADMIN, USER } from '@/constants/roles.constant'
@@ -19,7 +18,7 @@ const novelNavigationConfig: NavigationTree[] = [
         subMenu: [
             {
                 key: 'novel.list',
-                path: '',
+                path: `${NOVEL_PREFIX_PATH}/list`,
                 title: '作品一览',
                 translateKey: 'nav.novel.list',
                 icon: 'novelList',
@@ -29,7 +28,7 @@ const novelNavigationConfig: NavigationTree[] = [
             },
             {
                 key: 'novel.outline',
-                path: '',
+                path: `${NOVEL_PREFIX_PATH}/outline`,
                 title: '编写大纲',
                 translateKey: 'nav.novel.outline',
                 icon: 'novelOutline',
@@ -39,7 +38,7 @@ const novelNavigationConfig: NavigationTree[] = [
             },
             {
                 key: 'novel.content',
-                path: '',
+                path: `${NOVEL_PREFIX_PATH}/content`,
                 title: '开始码字',
                 translateKey: 'nav.novel.content',
                 icon: 'novelContent',

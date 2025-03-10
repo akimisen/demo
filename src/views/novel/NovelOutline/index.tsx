@@ -1,3 +1,3 @@
-import MarketingDashboard from './MarketingDashboard'
+import NovelOutline from './NovelOutline'
 
-export default MarketingDashboard
+export default NovelOutline

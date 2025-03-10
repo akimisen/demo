@@ -25,3 +25,5 @@ build
 *.sln
 *.sw?
 .vite-cache/
+
+.specstory/history/.what-is-this.md
