@@ -40,19 +40,40 @@ const StatisticCard = ({
         >
             <div className="flex justify-between items-center relative">
                 <div>
-                    <div className="mb-4 text-gray-900 dark:text-gray-100 font-bold">{title}</div>
-                    <h1 className="mb-1 text-gray-900 dark:text-gray-100">{value}</h1>
-                    <div className={`text-sm ${growShrink >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
-                        {growShrink >= 0 ? '+' : ''}{growShrink}% {compareFrom}
-                    </div>
+                    <div className="mb-4 text-gray-900 font-bold h-6">{title}</div>
+                    <h1 className="mb-1 text-gray-900">
+                        {typeof value === 'object' ? value : (
+                            <>
+                                <span className="text-3xl font-bold">{value}</span>
+                            </>
+                        )}
+                    </h1>
                 </div>
                 <div
                     className={
-                        'flex items-center justify-center min-h-12 min-w-12 max-h-12 max-w-12 bg-gray-900 dark:bg-gray-700 text-white rounded-full text-2xl'
+                        'flex items-center justify-center min-h-12 min-w-12 max-h-12 max-w-12 bg-gray-900 text-white rounded-full text-2xl'
                     }
                 >
                     {icon}
                 </div>
+            </div>
+            <div className="mt-2">
+                {growShrink !== undefined && (
+                    <div
+                        className={classNames(
+                            'inline-flex items-center rounded-full px-2 py-1 text-xs',
+                            growShrink >= 0
+                                ? 'text-emerald-600 bg-emerald-100'
+                                : 'text-red-600 bg-red-100'
+                        )}
+                    >
+                        <span>
+                            {growShrink >= 0 ? '+' : ''}
+                            {growShrink}%
+                        </span>
+                        <span className="ml-1">{compareFrom}</span>
+                    </div>
+                )}
             </div>
         </div>
     )
@@ -132,12 +153,12 @@ const WritingStats = ({ data }: WritingStatsProps) => {
                     title="字数"
                     className="bg-sky-100 dark:bg-sky-900/30"
                     value={
-                        <NumericFormat
-                            displayType="text"
-                            value={data[selectedPeriod].wordCount.total}
-                            thousandSeparator={true}
-                            suffix="字"
-                        />
+                        <>
+                            <span className="text-3xl font-bold">
+                                {new Intl.NumberFormat().format(data[selectedPeriod].wordCount.total)}
+                            </span>
+                            <span className="text-sm ml-1 text-gray-600">字</span>
+                        </>
                     }
                     growShrink={data[selectedPeriod].wordCountGrowth}
                     compareFrom={data[selectedPeriod].compareFrom}
@@ -147,12 +168,12 @@ const WritingStats = ({ data }: WritingStatsProps) => {
                     title="速度"
                     className="bg-emerald-100 dark:bg-emerald-900/30"
                     value={
-                        <NumericFormat
-                            displayType="text"
-                            value={data[selectedPeriod].writingSpeed.total}
-                            thousandSeparator={true}
-                            suffix="字/小时"
-                        />
+                        <>
+                            <span className="text-3xl font-bold">
+                                {data[selectedPeriod].writingSpeed.total}
+                            </span>
+                            <span className="text-sm ml-1 text-gray-600">字/小时</span>
+                        </>
                     }
                     growShrink={data[selectedPeriod].speedGrowth}
                     compareFrom={data[selectedPeriod].compareFrom}

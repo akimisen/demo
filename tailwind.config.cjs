@@ -12,6 +12,11 @@ module.exports = {
 		theme: {
 			fontFamily: {
 				sans: [
+					'"Source Han Serif SC"',
+					'"Source Han Serif"',
+					'"思源宋体"',
+					'"Alibaba PuHuiTi"',
+					'"阿里巴巴普惠体"',
 					'Inter',
 					'ui-sans-serif',
 					'system-ui',
@@ -29,6 +34,9 @@ module.exports = {
 					'"Noto Color Emoji"',
 				],
 				serif: [
+					'"Source Han Serif SC"',
+		            '"Source Han Serif"',
+ 			    	'"思源宋体"',
 					'ui-serif',
 					'Georgia',
 					'Cambria',

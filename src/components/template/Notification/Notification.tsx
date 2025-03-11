@@ -110,7 +110,8 @@ const _Notification = ({ className }: { className?: string }) => {
             ref={notificationDropdownRef}
             renderTitle={
                 <NotificationToggle
-                    dot={unreadNotification}
+                    // dot={unreadNotification}
+                    dot={false}
                     className={className}
                 />
             }
