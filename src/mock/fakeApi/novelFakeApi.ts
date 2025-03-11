@@ -1,9 +1,9 @@
 import { mock } from '../MockAdapter'
-// import { uniqueId } from 'lodash'
+import { uniqueId } from 'lodash'
 import wildCardSearch from '@/utils/wildCardSearch'
-import sortBy, { Primer } from '@/utils/sortBy'
+import sortBy from '@/utils/sortBy'
 import paginate from '@/utils/paginate'
-import { novelListData } from '../data/novelData'
+import { novelListData, chapters } from '../data/novelData'
 
 mock.onGet(`/api/novels`).reply((config) => {
     const { pageIndex, pageSize, sort, query } = config.params || {}
@@ -14,7 +14,7 @@ mock.onGet(`/api/novels`).reply((config) => {
 
     const sanitizeorders = novels.filter((elm) => typeof elm !== 'function')
     let data = sanitizeorders
-    let total = novels.length
+    let total = data.length
 
     if (key && order) {
         if (key === 'genre'||key === 'status') {
@@ -47,162 +47,150 @@ mock.onGet(`/api/novels`).reply((config) => {
     })
 })
 
+// 获取单个小说
+mock.onGet(/\/api\/novels\/\w+/).reply((config) => {
+    const id = config.url?.split('/').pop()
+    const novel = novelListData.find(n => n.id === id)
+    return novel ? [200, novel] : [404, { message: '小说不存在-获取单个小说' }]
+})
 
-// // 创建小说
-// mock.onPost(`/novels`).reply((config) => {
-//     const newNovel = JSON.parse(config.data)
-//     newNovel.id = uniqueId('novel_')
-//     newNovel.lastUpdated = new Date().toISOString()
-//     newNovel.last_edited_at = newNovel.lastUpdated
-    
-//     novels.push(newNovel)
-//     return [201, newNovel]
-// })
+// 创建小说
+mock.onPost('/api/novels').reply((config) => {
+    const newNovel = {
+        ...JSON.parse(config.data),
+        id: uniqueId(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    }
+    novelListData.push(newNovel)
+    return [201, newNovel]
+})
 
-// // 更新小说
-// mock.onPut(/\/api\/novels\/novel_\d+/).reply((config) => {
-//     const id = config.url?.split('/').pop()
-//     const novelIndex = novels.findIndex(n => n.id === id)
+// 更新小说
+mock.onPut(/\/api\/novels\/\w+/).reply((config) => {
+    const id = config.url?.split('/').pop()
+    const index = novelListData.findIndex(n => n.id === id)
+    if (index === -1) return [404, { message: '小说不存在-更新' }]
     
-//     if (novelIndex >= 0) {
-//         const updatedNovel = JSON.parse(config.data)
-//         updatedNovel.lastUpdated = new Date().toISOString()
-//         updatedNovel.last_edited_at = updatedNovel.lastUpdated
-        
-//         novels[novelIndex] = { ...novels[novelIndex], ...updatedNovel }
-//         return [200, novels[novelIndex]]
-//     }
-//     return [404, { message: '小说不存在' }]
-// })
+    const updatedNovel = {
+        ...novelListData[index],
+        ...JSON.parse(config.data),
+        updatedAt: new Date().toISOString()
+    }
+    novelListData[index] = updatedNovel
+    return [200, updatedNovel]
+})
 
-// // 删除小说
-// mock.onDelete(/\/api\/novels\/novel_\d+/).reply((config) => {
-//     const id = config.url?.split('/').pop()
-//     const novelIndex = novels.findIndex(n => n.id === id)
+// 删除小说
+mock.onDelete(/\/api\/novels\/\w+/).reply((config) => {
+    const id = config.url?.split('/').pop()
+    const index = novelListData.findIndex(n => n.id === id)
+    if (index === -1) return [404, { message: '小说不存在' }]
     
-//     if (novelIndex >= 0) {
-//         novels.splice(novelIndex, 1)
-//         return [200, { success: true }]
-//     }
-//     return [404, { message: '小说不存在' }]
-// })
+    novelListData.splice(index, 1)
+    return [204]
+})
 
-// // 获取小说章节列表
-// mock.onGet(/\/api\/novels\/novel_\d+\/chapters/).reply((config) => {
-//     const novelId = config.url?.split('/')[3]
-//     const novelChapters = chapters[novelId as keyof typeof chapters] || []
-//     return [200, novelChapters]
-// })
+// 获取章节列表
+mock.onGet(/\/api\/novels\/\w+\/chapters/).reply((config) => {
+    const novelId = config.url?.split('/')[2]
+    // 添加调试语句
+    console.log('Parsed novelId:', novelId);
+    const { pageIndex, pageSize, sort, query, status } = config.params || {}
 
-// // 获取单个章节详情
-// mock.onGet(/\/api\/novels\/novel_\d+\/chapters\/chapter_\d+/).reply((config) => {
-//     const urlParts = config.url?.split('/')
-//     const novelId = urlParts?.[3]
-//     const chapterId = urlParts?.[5]
-    
-//     const novelChapters = chapters[novelId as keyof typeof chapters] || []
-//     const chapter = novelChapters.find(c => c.id === chapterId)
-    
-//     if (chapter) {
-//         return [200, chapter]
-//     }
-//     return [404, { message: '章节不存在' }]
-// })
+    if (!chapters[novelId]) {
+        // 如果没有数据，生成一些测试数据
+        chapters[novelId] = Array(10).fill(null).map((_, index) => ({
+            id: `${novelId}-chapter-${index + 1}`,
+            novel_id: novelId,
+            title: `第${index + 1}章`,
+            order: index + 1,
+            summary: `这是第${index + 1}章的摘要`,
+            word_count: Math.floor(Math.random() * 5000) + 1000,
+            characters: [],
+            locations: [],
+            status: ['draft', 'completed', 'published'][Math.floor(Math.random() * 3)],
+            is_published: Math.random() > 0.5,
+            plotline: null,
+            hook: null,
+            value: null,
+            tags: [],
+            notes: null,
+            revision_history: []
+        }))
+    }
 
-// // 创建章节
-// mock.onPost(/\/api\/novels\/novel_\d+\/chapters/).reply((config) => {
-//     const novelId = config.url?.split('/')[3]
-//     const newChapter = JSON.parse(config.data)
-    
-//     newChapter.id = uniqueId('chapter_')
-//     newChapter.novelId = novelId
-//     newChapter.lastUpdated = new Date().toISOString()
-    
-//     if (!chapters[novelId as keyof typeof chapters]) {
-//         (chapters as any)[novelId] = []
-//     }
-    
-//     (chapters as any)[novelId].push(newChapter)
-//     return [201, newChapter]
-// })
+    let data = [...chapters[novelId]]
+    let total = data.length
 
-// // 更新章节
-// mock.onPut(/\/api\/novels\/novel_\d+\/chapters\/chapter_\d+/).reply((config) => {
-//     const urlParts = config.url?.split('/')
-//     const novelId = urlParts?.[3]
-//     const chapterId = urlParts?.[5]
-    
-//     const novelChapters = chapters[novelId as keyof typeof chapters] || []
-//     const chapterIndex = novelChapters.findIndex(c => c.id === chapterId)
-    
-//     if (chapterIndex >= 0) {
-//         const updatedChapter = JSON.parse(config.data)
-//         updatedChapter.lastUpdated = new Date().toISOString()
-        
-//         novelChapters[chapterIndex] = { ...novelChapters[chapterIndex], ...updatedChapter }
-//         return [200, novelChapters[chapterIndex]]
-//     }
-//     return [404, { message: '章节不存在' }]
-// })
+    // 排序
+    if (sort?.key && sort?.order) {
+        data.sort(sortBy(sort.key, sort.order === 'desc'))
+    }
 
-// // 删除章节
-// mock.onDelete(/\/api\/novels\/novel_\d+\/chapters\/chapter_\d+/).reply((config) => {
-//     const urlParts = config.url?.split('/')
-//     const novelId = urlParts?.[3]
-//     const chapterId = urlParts?.[5]
-    
-//     const novelChapters = chapters[novelId as keyof typeof chapters] || []
-//     const chapterIndex = novelChapters.findIndex(c => c.id === chapterId)
-    
-//     if (chapterIndex >= 0) {
-//         novelChapters.splice(chapterIndex, 1)
-//         return [200, { success: true }]
-//     }
-//     return [404, { message: '章节不存在' }]
-// })
+    // 搜索
+    if (query) {
+        data = wildCardSearch(data, query)
+        total = data.length
+    }
 
-// // 获取章节内容
-// mock.onGet(/\/api\/novels\/novel_\d+\/chapters\/chapter_\d+\/content/).reply((config) => {
-//     const chapterId = config.url?.split('/')[5]
-//     const content = chapterContents[chapterId as keyof typeof chapterContents]
-    
-//     if (content) {
-//         return [200, { content }]
-//     }
-//     return [404, { message: '章节内容不存在' }]
-// })
+    // 分页
+    data = paginate(data, pageSize, pageIndex)
 
-// // 更新章节内容
-// mock.onPut(/\/api\/novels\/novel_\d+\/chapters\/chapter_\d+\/content/).reply((config) => {
-//     const chapterId = config.url?.split('/')[5]
-//     const { content } = JSON.parse(config.data)
-    
-//     if (chapterContents[chapterId as keyof typeof chapterContents]) {
-//         (chapterContents as any)[chapterId] = content
-//         return [200, { success: true }]
-//     }
-//     return [404, { message: '章节内容不存在' }]
-// })
+    return [200, { list: data, total }]
+})
 
-// // 获取小说大纲
-// mock.onGet(/\/api\/novels\/novel_\d+\/outline/).reply((config) => {
-//     const novelId = config.url?.split('/')[3]
-//     const outline = outlines[novelId as keyof typeof outlines]
-    
-//     if (outline) {
-//         return [200, outline]
-//     }
-//     return [404, { message: '大纲不存在' }]
-// })
+// 获取单个章节
+mock.onGet(/\/api\/novels\/\w+\/chapters\/\w+/).reply((config) => {
+    const [novelId, chapterId] = config.url?.split('/').slice(3) || []
+    const chapterList = chapters[novelId] || []
+    const chapter = chapterList.find(c => c.id === chapterId)
+    return chapter ? [200, chapter] : [404, { message: '章节不存在' }]
+})
 
-// // 更新大纲
-// mock.onPut(/\/api\/novels\/novel_\d+\/outline/).reply((config) => {
-//     const novelId = config.url?.split('/')[3]
-//     const updatedOutline = JSON.parse(config.data)
+// 创建章节
+mock.onPost(/\/api\/novels\/\w+\/chapters/).reply((config) => {
+    const novelId = config.url?.split('/')[3]
+    const newChapter = {
+        ...JSON.parse(config.data),
+        id: uniqueId('chapter-'),
+        novel_id: novelId,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    }
     
-//     if (outlines[novelId as keyof typeof outlines]) {
-//         (outlines as any)[novelId] = { ...outlines[novelId as keyof typeof outlines], ...updatedOutline }
-//         return [200, (outlines as any)[novelId]]
-//     }
-//     return [404, { message: '大纲不存在' }]
-// })
+    if (!chapters[novelId]) {
+        chapters[novelId] = []
+    }
+    chapters[novelId].push(newChapter)
+    return [201, newChapter]
+})
+
+// 更新章节
+mock.onPut(/\/api\/novels\/\w+\/chapters\/\w+/).reply((config) => {
+    const [novelId, chapterId] = config.url?.split('/').slice(3) || []
+    const chapterList = chapters[novelId] || []
+    const index = chapterList.findIndex(c => c.id === chapterId)
+    
+    if (index === -1) return [404, { message: '章节不存在' }]
+    
+    const updatedChapter = {
+        ...chapterList[index],
+        ...JSON.parse(config.data),
+        updatedAt: new Date().toISOString()
+    }
+    chapterList[index] = updatedChapter
+    return [200, updatedChapter]
+})
+
+// 删除章节
+mock.onDelete(/\/api\/novels\/\w+\/chapters\/\w+/).reply((config) => {
+    const [novelId, chapterId] = config.url?.split('/').slice(3) || []
+    const chapterList = chapters[novelId] || []
+    const index = chapterList.findIndex(c => c.id === chapterId)
+    
+    if (index === -1) return [404, { message: '章节不存在' }]
+    
+    chapterList.splice(index, 1)
+    return [204]
+})

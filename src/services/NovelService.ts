@@ -43,10 +43,21 @@ export async function apiDeleteNovel<T>(id: string) {
     })
 }
 
-export async function apiGetChapters<T>(novelId: string) {
+export async function apiGetChapterList<T, U extends Record<string, unknown>>({
+    novelId,
+    ...params
+}: U) {
+    // 确保 URL 格式正确
+    const url = `/novels/${novelId}/chapters`;
+    console.log('NovelService - apiGetChapterList:', {
+        novelId,
+        constructedUrl: url,
+        fullParams: params
+    });
     return ApiService.fetchDataWithAxios<T>({
         url: `/novels/${novelId}/chapters`,
         method: 'get',
+        params,
     })
 }
 
@@ -69,7 +80,7 @@ export async function apiCreateChapter<T, U extends Record<string, unknown>>(
 }
 
 export async function apiUpdateChapter<T, U extends Record<string, unknown>>(
-    novelId: string,
+    novelId: string|undefined,
     chapterId: string,
     data: U
 ) {

@@ -27,3 +27,5 @@ build
 .vite-cache/
 
 .specstory/
+**/__pycache__/
+*.pyc

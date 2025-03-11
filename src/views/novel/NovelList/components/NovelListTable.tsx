@@ -20,12 +20,29 @@ const statusConfig = {
     'planned': { label: '计划中', bgClass: 'bg-amber-100', textClass: 'text-amber-500' }
 }
 
+// 类型标签颜色配置
+const genreColorSchemes = {
+    '科幻': { bgClass: 'bg-indigo-100', textClass: 'text-indigo-600' },
+    '奇幻': { bgClass: 'bg-purple-100', textClass: 'text-purple-600' },
+    '武侠': { bgClass: 'bg-amber-100', textClass: 'text-amber-600' },
+    '仙侠': { bgClass: 'bg-cyan-100', textClass: 'text-cyan-600' },
+    '玄幻': { bgClass: 'bg-blue-100', textClass: 'text-blue-600' },
+    '历史': { bgClass: 'bg-yellow-100', textClass: 'text-yellow-600' },
+    '军事': { bgClass: 'bg-red-100', textClass: 'text-red-600' },
+    '都市': { bgClass: 'bg-pink-100', textClass: 'text-pink-600' },
+    '悬疑': { bgClass: 'bg-orange-100', textClass: 'text-orange-600' },
+    '恐怖': { bgClass: 'bg-rose-100', textClass: 'text-rose-600' },
+    '游戏': { bgClass: 'bg-green-100', textClass: 'text-green-600' },
+    '体育': { bgClass: 'bg-teal-100', textClass: 'text-teal-600' },
+    '轻小说': { bgClass: 'bg-violet-100', textClass: 'text-violet-600' },
+    '西幻': { bgClass: 'bg-purple-100', textClass: 'text-purple-600' }
+}
+
 const NovelColumn = ({ row }: { row: Novel }) => {
     const navigate = useNavigate()
 
     const onView = () => {
-        // navigate(`/novel/${row.id}/outline`)
-        navigate(`/concepts/orders/order-details/${row.id}`)
+        navigate(`/novel/outline/${row.id}`)
     }
 
     return (
@@ -45,7 +62,7 @@ const ActionColumn = ({ row }: { row: Novel }) => {
     }
 
     const onView = () => {
-        navigate(`/concepts/orders/order-details/${row.id}`)    
+        navigate(`/novel/outline/${row.id}`)
     }
 
     const onEdit = () => {
@@ -106,8 +123,20 @@ const NovelListTable = () => {
                 header: '类型',
                 accessorKey: 'genre',
                 cell: (props) => {
-                    const row = props.row.original
-                    return <span>{row.genre}</span>
+                    const genre = props.row.original.genre
+                    if (!genre) return <span>-</span>
+                    const config = genreColorSchemes[genre] || { 
+                        bgClass: 'bg-gray-100', 
+                        textClass: 'text-gray-600' 
+                    }
+                    
+                    return (
+                        <Tag className={config.bgClass}>
+                            <span className={`capitalize font-semibold ${config.textClass}`}>
+                                {genre}
+                            </span>
+                        </Tag>
+                    )
                 },
             },
             {
@@ -129,7 +158,7 @@ const NovelListTable = () => {
                 header: '字数',
                 accessorKey: 'wordCount',
                 cell: (props) => {
-                    const wordCount = props.row.original.wordCount || props.row.original.word_count || 0
+                    const wordCount = props.row.original.wordCount || 0
                     return (
                         <span>{wordCount.toLocaleString()}</span>
                     )
@@ -145,20 +174,20 @@ const NovelListTable = () => {
             },
             {
                 header: '最后更新',
-                accessorKey: 'lastUpdated',
+                accessorKey: 'updatedAt',
                 cell: (props) => {
-                    const date = props.row.original.lastUpdated || props.row.original.last_edited_at
+                    const date = props.row.original.updatedAt
                     return date ? <span>{dayjs(date).format('YYYY-MM-DD')}</span> : <span>-</span>
                 },
             },
-            {
-                header: '进度',
-                accessorKey: 'progress',
-                cell: (props) => {
-                    const { progress } = props.row.original
-                    return progress ? <span>{progress}%</span> : <span>-</span>
-                },
-            },
+            // {
+            //     header: '进度',
+            //     accessorKey: 'progress',
+            //     cell: (props) => {
+            //         const { progress } = props.row.original
+            //         return progress ? <span>{progress}%</span> : <span>-</span>
+            //     },
+            // },
             {
                 header: '',
                 id: 'action',
@@ -192,7 +221,7 @@ const NovelListTable = () => {
     }
 
     // const onRowClick = (row: Novel) => {
-    //     navigate(`/novel/${row.id}/outline`)
+    //     navigate(`/novel/outline/${row.id}`)
     // }
 
     return (

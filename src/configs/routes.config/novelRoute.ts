@@ -12,39 +12,29 @@ const novelRoute: Routes = [
         meta: { pageContainerType: 'contained' }
     },
     {
-        key: 'novel.list.detail',
-        path: `${NOVEL_PREFIX_PATH}/list/:id`,
-        component: lazy(() => import('@/views/concepts/orders/OrderDetails')),
-        authority: [ADMIN, USER],
-        meta: {
-            header: {
-                contained: true,
-                title: lazy(
-                    () =>
-                        import(
-                            '@/views/concepts/orders/OrderDetails/components/OrderDetailHeader'
-                        ),
-                ),
-                extraHeader: lazy(
-                    () =>
-                        import(
-                            '@/views/concepts/orders/OrderDetails/components/OrderDetailHeaderExtra'
-                        ),
-                ),
-            },
-            pageContainerType: 'contained',
-        },
-    },
-    {
-        key: 'novel.outline',
-        path: `${NOVEL_PREFIX_PATH}/list/:id`,
+        key: 'novel.outline.default',
+        path: `${NOVEL_PREFIX_PATH}/outline`,
         component: lazy(() => import('@/views/novel/NovelOutline')),
         authority: [ADMIN, USER],
         meta: { pageContainerType: 'contained' }
     },
     {
-        key: 'novel.editor',
-        path: `${NOVEL_PREFIX_PATH}/:novelId/editor`,
+        key: 'novel.outline.id',
+        path: `${NOVEL_PREFIX_PATH}/outline/:id`,
+        component: lazy(() => import('@/views/novel/NovelOutline')),
+        authority: [ADMIN, USER],
+        meta: { pageContainerType: 'contained' }
+    },
+    {
+        key: 'novel.editor.default',
+        path: `${NOVEL_PREFIX_PATH}/editor`,
+        component: lazy(() => import('@/views/novel/ChapterEdit/ChapterEdit')),
+        authority: [ADMIN, USER],
+        meta: { pageContainerType: 'contained' }
+    },
+    {
+        key: 'novel.editor.id',
+        path: `${NOVEL_PREFIX_PATH}/editor/:id`,
         component: lazy(() => import('@/views/novel/ChapterEdit/ChapterEdit')),
         authority: [ADMIN, USER],
         meta: { pageContainerType: 'contained' }

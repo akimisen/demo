@@ -2,16 +2,15 @@ import { ReactNode } from 'react';
 
 // 小说基本类型
 export type Novel = {
+    index: number;
     id: string;
     title: string;
-    user_id?: string;  // 创建者ID
-    author?: string;   // 作者名称（前端展示用）
-    abstract?: string; // 小说摘要
-    summary?: string;  // 与abstract同义
-    genre?: string;    // 小说类型/流派
+    user_id?: string;
+    author?: string;
+    abstract?: string;
+    genre?: string;
     status: 'drafting' | 'completed' | 'published' | 'ongoing' | 'planned';
-    word_count: number;
-    wordCount?: number; // 兼容fakeApi中的字段名
+    wordCount?: number; // 万字（前端展示用）
     
     // 引用关系
     characters?: string[];
@@ -27,8 +26,8 @@ export type Novel = {
     // 统计数据
     chapter_count: number;
     chapterCount?: number; // 兼容fakeApi中的字段名
-    last_edited_at?: string;
-    lastUpdated?: string;  // 兼容fakeApi中的字段名
+    createAt?: string;
+    updatedAt?: string;  // 兼容fakeApi中的字段名
     progress?: number;     // 完成进度百分比
     
     // 额外字段（来自fakeApi）
@@ -51,19 +50,6 @@ export type NovelFilter = {
 export type GetNovelsResponse = {
     list: Novels;
     total: number;
-}
-
-// 章节类型
-export type Chapter = {
-    id: string;
-    novelId: string;
-    title: string;
-    order: number;
-    wordCount: number;
-    status: 'draft' | 'completed' | 'reviewing';
-    contentPath?: string;
-    lastUpdated: string;
-    customFields?: Record<string, any>;
 }
 
 // 大纲类型

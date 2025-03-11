@@ -27,7 +27,7 @@ const novelNavigationConfig: NavigationTree[] = [
                 subMenu: [],
             },
             {
-                key: 'novel.outline',
+                key: 'novel.outline.default',
                 path: `${NOVEL_PREFIX_PATH}/outline`,
                 title: '编写大纲',
                 translateKey: 'nav.novel.outline',
@@ -37,7 +37,7 @@ const novelNavigationConfig: NavigationTree[] = [
                 subMenu: [],
             },
             {
-                key: 'novel.content',
+                key: 'novel.content.default',
                 path: `${NOVEL_PREFIX_PATH}/content`,
                 title: '开始码字',
                 translateKey: 'nav.novel.content',
