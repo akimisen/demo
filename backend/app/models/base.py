@@ -9,14 +9,18 @@ class PyObjectId(ObjectId):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v):
+    def validate(cls, v, handler):
         if not ObjectId.is_valid(v):
             raise ValueError("Invalid ObjectId")
         return ObjectId(v)
 
     @classmethod
-    def __get_pydantic_json_schema__(cls, _schema_generator):
-        return {"type": "string"}
+    def __get_pydantic_json_schema__(cls, core_schema, handler):
+        return {
+            "type": "string",
+            "description": "ObjectId string representation",
+            "examples": ["507f1f77bcf86cd799439011"]
+        }
     
     def __json__(self):
         return str(self)

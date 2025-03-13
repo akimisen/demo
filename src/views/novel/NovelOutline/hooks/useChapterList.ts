@@ -26,33 +26,30 @@ export default function useChapterList() {
 
     const { id } = useParams()
 
-    // 使用 SWR 获取数据
+    // 修改 SWR 配置以适应真实 API
     const { data, error, isLoading, mutate } = useSWR(
-        [`/api/novels/${id}/chapters`, { ...tableData, ...filterData, novelId:id}] ,
-        ([_,params]) => {
-            console.log('apiGetChapterList request details:', {
-                novelId: id,
-                fullUrl: `/api/novels/${id}/chapters`,
-                params: { ...params},
-                filterData,
-                tableData
-            });
-            return apiGetChapterList<GetChapterListResponse, TableQueries & { novelId: string|undefined }>({
-                ...params,
-                novelId:id
-            });
-        },
+        [`/api/novels/${id}/chapters`, tableData],
+        ([url, params]) => apiGetChapterList({
+            ...params,
+            novelId: id,
+            pageIndex: params.pageIndex || 1,
+            pageSize: params.pageSize || 10,
+            sort: params.sort || {},
+            query: params.query || ''
+        }),
         {
             onSuccess: (data) => {
-                console.log('Received chapters data:', data);
                 if (data?.list) {
                     setChapters(data.list)
                 }
             },
             onError: (err) => {
-                console.error('Failed to fetch chapters:', err);
+                console.error('Failed to fetch chapters:', err)
             },
+            // 可以根据需要调整以下配置
             revalidateOnFocus: false,
+            revalidateIfStale: true,
+            shouldRetryOnError: true
         }
     )
 
@@ -64,19 +61,10 @@ export default function useChapterList() {
 
         try {
             await apiUpdateChapter(id, chapterId, chapterData)
-            await mutate() // 重新获取数据
-            // toast.push(
-            //     <Notification closable title="成功">
-            //         章节更新成功
-            //     </Notification>
-            // )
+            await mutate() // 重新获取数据以更新列表
         } catch (error) {
             console.error('更新章节失败:', error)
-            // toast.push(
-            //     <Notification closable title="错误">
-            //         更新章节失败，请重试
-            //     </Notification>
-            // )
+            throw error // 让调用者处理错误
         }
     }
 
@@ -86,19 +74,10 @@ export default function useChapterList() {
         
         try {
             await apiDeleteChapter(id, chapterId)
-            await mutate() // 重新获取数据
-            // toast.push(
-            //     <Notification closable title="成功">
-            //         章节删除成功
-            //     </Notification>
-            // )
+            await mutate() // 重新获取数据以更新列表
         } catch (error) {
             console.error('删除章节失败:', error)
-            // toast.push(
-            //     <Notification closable title="错误">
-            //         删除章节失败，请重试
-            //     </Notification>
-            // )
+            throw error // 让调用者处理错误
         }
     }
 
@@ -107,21 +86,13 @@ export default function useChapterList() {
         if (!id) return
         
         try {
-            // 这里需要实现一个API来保存章节顺序
-            // await apiUpdateChaptersOrder(novelId, newChapters)
+            // 假设你的 API 有一个更新章节顺序的端点
+            await apiUpdateChaptersOrder(id, newChapters)
             reorderChapters(newChapters)
-            // toast.push(
-            //     <Notification closable title="成功">
-            //         章节顺序更新成功
-            //     </Notification>
-            // )
+            await mutate() // 重新获取数据以确保顺序更新
         } catch (error) {
             console.error('更新章节顺序失败:', error)
-            // toast.push(
-            //     <Notification closable title="错误">
-            //         更新章节顺序失败，请重试
-            //     </Notification>
-            // )
+            throw error
         }
     }
 

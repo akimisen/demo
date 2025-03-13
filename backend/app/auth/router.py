@@ -13,7 +13,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     实际应用中应验证用户凭据并从数据库获取用户
     """
     # 简化的认证逻辑，仅用于测试
-    if form_data.username == "testuser" and form_data.password == "testpassword":
+    if form_data.username == "aaa" and form_data.password == "aaa":
         access_token = create_access_token(data={"sub": TEST_USER["id"]})
         return {"access_token": access_token, "token_type": "bearer"}
     else:

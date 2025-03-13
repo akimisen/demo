@@ -3,7 +3,7 @@
 export const novelListData = [
     {
         index: 1, // 查询序号
-        id: 'novel_1',
+        id: '67d2c6ae6423eb961251e944',
         title: "星辰之主",
         author: "user123",
         abstract: "一个平凡少年意外获得星辰之力...",

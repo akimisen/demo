@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from app.auth.dependencies import get_current_user
 from app.services.novel_service import NovelService
 from app.schemas.novel import NovelCreate, NovelResponse, NovelUpdate, PaginatedNovelResponse
-from app.schemas.chapter import ChapterResponse
+from app.schemas.chapter import ChapterResponse, PaginatedChapterResponse
 from app.db.mongodb import get_db
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
@@ -17,7 +17,7 @@ async def create_novel(
 ):
     """创建新小说"""
     novel_service = NovelService(db)
-    novel_data = novel.dict()
+    novel_data = novel.model_dump()
     return await novel_service.create_novel(novel_data, current_user["id"])
 
 @router.get("/all", response_model=PaginatedNovelResponse)
@@ -60,11 +60,11 @@ async def add_chapter(
     
     return await novel_service.add_chapter(novel_id, chapter_data)
 
-@router.get("/{novel_id}/chapters", response_model=List[ChapterResponse])
+@router.get("/{novel_id}/chapters", response_model=PaginatedChapterResponse)
 async def get_novel_chapters(
     novel_id: str,
     page: int = 1,
-    page_size: int = 20,
+    page_size: int = 10,
     current_user = Depends(get_current_user),
     db: AsyncIOMotorDatabase = Depends(get_db)
 ):
@@ -94,11 +94,26 @@ async def get_novel_chapter(
 
     return await novel_service.get_novel_chapter(novel_id,chapter_id)
 
+@router.get("/{novel_id}/chapters/by-order/{order}", response_model=ChapterResponse)
+async def get_novel_chapter(    
+    novel_id: str,
+    order: int,
+    current_user = Depends(get_current_user),
+    db: AsyncIOMotorDatabase = Depends(get_db)
+):
+    novel_service = NovelService(db)
+    # 检查小说是否存在且属于当前用户
+    novel = await novel_service.get_novel(novel_id)
+    if not novel or novel["user_id"] != current_user["id"]:
+        raise HTTPException(status_code=404, detail="Novel not found")
+
+    return await novel_service.get_novel_chapter_by_order(novel_id,order)
+
 @router.get("/{novel_id}/with-chapters")
 async def get_novel_with_chapters(
     novel_id: str,
     page: int = 1,
-    page_size: int = 20,
+    page_size: int = 10,
     current_user = Depends(get_current_user),
     db: AsyncIOMotorDatabase = Depends(get_db)
 ):

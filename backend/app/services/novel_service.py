@@ -4,6 +4,8 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 from typing import List, Dict, Any, Optional
 from app.models.novel import Novel
 from app.models.chapter import Chapter
+from app.schemas.novel import NovelResponse
+from app.services.user_service import UserService
 
 class NovelService:
     """小说相关服务类，处理小说和章节的业务逻辑"""
@@ -18,10 +20,11 @@ class NovelService:
         self.db = db
         self.novels = self.db.novels
         self.chapters = self.db.chapters
+        self.user_service = UserService(db)  # 添加 UserService
         print(f"NovelService initialized with dbname: {self.db.name}") # 应该输出 'kuku'
         print(f"初始化NovelService.novel: {Novel.Config.collection}")  # 应该输出 'novels'
 
-    async def create_novel(self, novel_data: dict, user_id: str) -> Dict[str, Any]:
+    async def create_novel(self, novel_data: dict, user_id: str) -> NovelResponse:
         """
         创建新小说
         
@@ -32,30 +35,33 @@ class NovelService:
         Returns:
             创建的小说文档
         """
-        novel = Novel(
-            title=novel_data["title"],
-            author=novel_data.get("author", ""),
-            user_id=user_id,
-            abstract=novel_data.get("abstract"),
-            genre=novel_data.get("genre"),
-            protagonist=novel_data.get("protagonist"),
-            setting=novel_data.get("setting"),
-            target_audience=novel_data.get("target_audience"),
-            tags=novel_data.get("tags", []),
-            cover_image=novel_data.get("cover_image"),
-            custom_fields=novel_data.get("custom_fields", {})
-        )
+        # 获取用户名作为作者
+        username = await self.user_service.get_username_by_id(user_id)
+        if not username:
+            username = f"文豪{user_id}"
+
+        # 添加用户ID、作者和时间戳
+        novel_data.update({
+            "user_id": user_id,
+            "author": username,
+            "created_at": datetime.now(),
+            "updated_at": datetime.now(),
+            "chapter_count": 0,
+            "word_count": 0
+        })
         
-        # 添加时间戳
-        now = datetime.now()
-        novel.created_at = now
-        novel.updated_at = now
+        # 创建Novel实例并验证
+        novel = Novel(**novel_data)
         
-        # 插入到MongoDB
-        result = await self.novels.insert_one(novel.model_dump(by_alias=True))
+        # 确保不包含null的_id
+        novel_dict = novel.model_dump(by_alias=True, exclude={"id"})
         
-        # 返回插入的文档
-        return await self.get_novel(str(result.inserted_id))
+        # 插入数据并获取新ID
+        result = await self.novels.insert_one(novel_dict)
+        
+        # 获取创建的小说
+        created_novel = await self.get_novel(str(result.inserted_id))
+        return NovelResponse(**created_novel)
     
     async def get_user_novels(self, user_id: str, page: int = 1, page_size: int = 20):
         """获取用户的所有小说"""
@@ -158,7 +164,7 @@ class NovelService:
 
     async def get_novel_chapter(self, novel_id: str, chapter_id: str) -> Optional[Dict[str, Any]]:
         """
-        获取章节详情
+        获取章节详情（根据章节ID）
         
         Args:
             novel_id: 小说ID
@@ -171,6 +177,22 @@ class NovelService:
             return await self.chapters.find_one({
                 "novel_id": novel_id, 
                 "_id": ObjectId(chapter_id)
+            })
+        except:
+            return None
+    
+    async def get_novel_chapter_by_order(self, novel_id: str, order: int) -> Optional[Dict[str, Any]]:
+        """
+        获取章节详情（根据章节顺序）
+        
+        Args:
+            novel_id: 小说ID
+            order: 章节顺序
+        """
+        try:
+            return await self.chapters.find_one({
+                "novel_id": novel_id, 
+                "order": order
             })
         except:
             return None
@@ -211,7 +233,7 @@ class NovelService:
         )
         
         # 添加时间戳
-        now = datetime.utcnow()
+        now = datetime.now()
         chapter.created_at = now
         chapter.updated_at = now
         
