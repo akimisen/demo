@@ -1,6 +1,6 @@
 import os
-from pydantic_settings import BaseSettings
 from typing import List
+from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     APP_NAME: str = "Kukuwrite"
@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     
     # MongoDB设置
     MONGODB_URL: str = os.getenv("MONGODB_URL", "mongodb://localhost:27017")
-    MONGODB_DB_NAME: str = os.getenv("MONGODB_DB_NAME", "novel_assistant")
+    MONGODB_DB_NAME: str = os.getenv("MONGODB_DB_NAME", "kuku")
     
     # 认证设置
     SECRET_KEY: str = os.getenv("SECRET_KEY", "your_secret_key_change_in_production")

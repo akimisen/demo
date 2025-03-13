@@ -1,12 +1,14 @@
+from typing import Optional
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from app.config import settings
-from typing import Optional
-
+from tenacity import retry, stop_after_attempt, wait_fixed
 class MongoDB:
     client: Optional[AsyncIOMotorClient] = None
     db: Optional[AsyncIOMotorDatabase] = None
+    _connected = False
 
     @classmethod
+    @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
     async def connect_to_mongo(cls):
         """连接到MongoDB数据库"""
         if cls.client is None:
@@ -15,8 +17,16 @@ class MongoDB:
                 uuidRepresentation="standard"
             )
             cls.db = cls.client[settings.MONGODB_DB_NAME]
-            await cls.create_indexes()
+            cls._connected = True
             print(f"Connected to MongoDB: {settings.MONGODB_URL}")
+
+    @classmethod
+    async def health_check(cls):
+        try:
+            await cls.client.admin.command('ping')
+            return True
+        except:
+            return False
 
     @classmethod
     async def close_mongo_connection(cls):
@@ -48,6 +58,8 @@ class MongoDB:
 
 # 导出便捷访问方法
 async def get_db() -> AsyncIOMotorDatabase:
+    if not MongoDB._connected or MongoDB.db is None:
+        raise RuntimeError("Database not initialized or connection lost")
     return MongoDB.get_db()
 
 # 获取集合引用

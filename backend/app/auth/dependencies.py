@@ -9,7 +9,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/token")
 
 # 测试用户（实际应用中应从数据库获取）
 TEST_USER = {
-    "id": "test_user_id",
+    "id": "testuser_id",
     "username": "testuser",
     "email": "test@example.com",
     "is_active": True
@@ -33,6 +33,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         user_id: str = payload.get("sub")
+        print(f"user_id: {user_id}")
         if user_id is None:
             raise credentials_exception
     except JWTError:

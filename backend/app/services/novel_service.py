@@ -18,7 +18,9 @@ class NovelService:
         self.db = db
         self.novels = self.db.novels
         self.chapters = self.db.chapters
-        
+        print(f"NovelService initialized with dbname: {self.db.name}") # 应该输出 'kuku'
+        print(f"初始化NovelService.novel: {Novel.Config.collection}")  # 应该输出 'novels'
+
     async def create_novel(self, novel_data: dict, user_id: str) -> Dict[str, Any]:
         """
         创建新小说
@@ -45,7 +47,7 @@ class NovelService:
         )
         
         # 添加时间戳
-        now = datetime.utcnow()
+        now = datetime.now()
         novel.created_at = now
         novel.updated_at = now
         
@@ -55,33 +57,27 @@ class NovelService:
         # 返回插入的文档
         return await self.get_novel(str(result.inserted_id))
     
-    async def get_user_novels(self, user_id: str, page: int = 1, page_size: int = 20) -> Dict[str, Any]:
-        """
-        获取用户的所有小说
-        
-        Args:
-            user_id: 用户ID
-            page: 页码
-            page_size: 每页数量
-            
-        Returns:
-            包含小说列表和分页信息的字典
-        """
+    async def get_user_novels(self, user_id: str, page: int = 1, page_size: int = 20):
+        """获取用户的所有小说"""
         skip = (page - 1) * page_size
         
         # 获取总数
-        total = await self.novels.count_documents({"user_id": user_id})
+        total = await self.db.novels.count_documents({"user_id": user_id})
         
-        # 获取分页数据
-        cursor = self.novels.find(
-            {"user_id": user_id},
-            sort=[("updated_at", -1)]  # 按更新时间倒序
-        ).skip(skip).limit(page_size)
+        # 获取小说列表
+        cursor = self.db.novels.find({"user_id": user_id}) \
+                    .skip(skip) \
+                    .limit(page_size)
         
         novels = await cursor.to_list(length=page_size)
         
+        # 转换 ObjectId 为字符串
+        for novel in novels:
+            novel["_id"] = str(novel["_id"])
+        
         return {
             "list": novels,
+            "user_id": user_id,
             "total": total,
             "page": page,
             "page_size": page_size
@@ -124,7 +120,7 @@ class NovelService:
                 {"$set": {
                     "chapter_count": stats[0]["chapter_count"],
                     "word_count": stats[0]["word_count"],
-                    "updated_at": datetime.utcnow()
+                    "updated_at": datetime.now()
                 }}
             )
     

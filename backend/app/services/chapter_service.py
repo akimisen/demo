@@ -1,6 +1,6 @@
+from typing import List, Dict, Any
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from app.models.chapter import Chapter
-from typing import List, Dict, Any
 
 class ChapterService:
     def __init__(self, db: AsyncIOMotorDatabase):

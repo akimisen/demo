@@ -26,7 +26,16 @@ app.add_middleware(
 # 数据库连接事件（只需要一次）
 @app.on_event("startup")
 async def startup_db_client():
-    await MongoDB.connect_to_mongo()
+    try:
+        await MongoDB.connect_to_mongo()
+        # Perform a health check to verify connection
+        if not await MongoDB.health_check():
+            raise RuntimeError("Database health check failed")
+    except Exception as e:
+        print(f"Failed to connect to MongoDB: {e}")
+        # Exit the application
+        import sys
+        sys.exit(1)
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
@@ -45,3 +54,18 @@ async def root():
 async def home():
     return {"message": "home页"}
 
+# 添加全局异常处理器
+from fastapi import HTTPException
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request, exc):
+    return JSONResponse(status_code=422, content={"detail": exc.errors()})
+
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail},
+    )

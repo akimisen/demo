@@ -39,3 +39,11 @@ class Novel(MongoBaseModel):
     
     # 统计
     chapter_count: int = 0
+
+    class Config:
+        collection = "novels"  # 指定 MongoDB 集合名称
+        indexes = [
+            "user_id",  # 用户索引
+            "title",    # 标题索引
+            [("user_id", 1), ("status", 1)]  # 复合索引，用于按状态查询用户的小说
+        ]

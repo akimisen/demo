@@ -1,5 +1,8 @@
+// docker执行本地脚本
+// docker exec -i mongodb mongosh --eval "$(cat ./backend/docker/mongodb/init-mongo.js)"
+
 // 首先清空数据库，以便重复执行
-db = db.getSiblingDB('local');
+db = db.getSiblingDB('kuku');
 
 // 删除已存在的集合
 db.novels.drop();
@@ -14,8 +17,8 @@ db.novels.insertMany([
     {
         _id: ObjectId(),
         title: "星辰之主",
-        author: "user123",
-        user_id: "user_123",
+        author: "testuser",
+        user_id: "testuser_id",
         abstract: "一个平凡少年意外获得星辰之力...",
         genre: "玄幻",
         status: "ongoing",
@@ -38,8 +41,8 @@ db.novels.insertMany([
     {
         _id: ObjectId(),
         title: "魔法编年史",
-        author: "user123",
-        user_id: "user_123",
+        author: "testuser",
+        user_id: "testuser_id",
         abstract: "魔法世界的秘密历史...",
         genre: "奇幻",
         status: "ongoing",
@@ -64,7 +67,7 @@ db.novels.insertMany([
         _id: ObjectId(),
         title: "未开始创作的小说",
         author: "新作者",
-        user_id: "user_123",
+        user_id: "xxxuser_id",
         abstract: "这是一部尚未开始创作的小说...",
         genre: "科幻",
         status: "planned",
