@@ -1,6 +1,6 @@
 from datetime import datetime
-from typing import Optional, Any, ClassVar
-from pydantic import BaseModel, Field
+from typing import Optional, Any
+from pydantic import BaseModel, Field, field_validator
 from bson import ObjectId
 
 class PyObjectId(ObjectId):
@@ -10,6 +10,8 @@ class PyObjectId(ObjectId):
 
     @classmethod
     def validate(cls, v, handler):
+        if v is None:
+            raise ValueError("ObjectId cannot be None")
         if not ObjectId.is_valid(v):
             raise ValueError("Invalid ObjectId")
         return ObjectId(v)
@@ -26,9 +28,15 @@ class PyObjectId(ObjectId):
         return str(self)
 
 class MongoBaseModel(BaseModel):
-    id: Optional[PyObjectId] = Field(default=None, alias="_id")
-    created_at: Optional[datetime] = None
+    id: Optional[PyObjectId] = Field(default_factory=PyObjectId, alias="_id")
+    created_at: datetime = Field(default_factory=datetime.now)
     updated_at: Optional[datetime] = None
+
+    @field_validator("id", mode="before")
+    def prevent_none_id(cls, v):
+        if v is None:
+            return PyObjectId()  # 自动生成新的ObjectId
+        return v
 
     class Config:
         populate_by_name = True

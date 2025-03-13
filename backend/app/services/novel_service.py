@@ -53,8 +53,8 @@ class NovelService:
         # 创建Novel实例并验证
         novel = Novel(**novel_data)
         
-        # 确保不包含null的_id
-        novel_dict = novel.model_dump(by_alias=True, exclude={"id"})
+        # 确保不包含id字段（让MongoDB自动生成）
+        novel_dict = novel.model_dump(by_alias=True, exclude={"id","_id"})
         
         # 插入数据并获取新ID
         result = await self.novels.insert_one(novel_dict)
